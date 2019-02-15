@@ -1,0 +1,217 @@
+% ==========================================================================================
+% ==========================================================================================
+% ==========================================================================================
+
+    \documentclass[12pt]{article}
+
+% ==========================================================================================
+% ==========================================================================================
+% ==========================================================================================
+
+% basic setup
+
+     \usepackage[T1]{fontenc}
+     \usepackage{microtype}
+    % \usepackage{graphicx}
+    % \usepackage{fullpage} 
+    % \usepackage{parskip}
+    % \usepackage{authblk} % activate if using \maketitle
+    % graphicx,verbatim,textcomp,siunitx,amsmath,amssymb,mathrsfs,textgreek,float,ulem
+    % \usepackage[version=4]{mhchem}
+    % \usepackage{tikz} % remove if no tikz
+    % \usepackage{mathptmx}   
+    % \usepackage{enumitem} 
+    % \def\mymargins{1.3in}\usepackage[top=\mymargins, bottom=\mymargins, left=\mymargins, right=\mymargins]{geometry}
+    % \usepackage{chemfig}\setchemfig{atom sep=2em}\setchemfig{angle increment=30} % see chemfif
+    % \usepackage[bottom,hang,symbol]{footmisc}\setlength\footnotemargin{9pt}\interfootnotelinepenalty=10000\setlength{\skip\footins}{0.5cm}  
+    % \usepackage{setspace}\setstretch{1.1}
+    
+% ==========================================================================================
+% ==========================================================================================
+% ==========================================================================================
+
+% natbib references
+
+    % \usepackage[super,comma,sort&compress]{natbib}
+    % \renewcommand{\bibnumfmt}[1]{#1.}
+    % \let\oldbibliography\thebibliography\renewcommand{\thebibliography}[1]{\oldbibliography{#1}\setlength{\itemsep}{3pt}}
+    % \newcommand*\myref[6]{\bibitem{#1}#2 \textit{#3} \textbf{#4}, \textit{#5}, #6.} 
+
+% ==========================================================================================
+% ==========================================================================================
+% ==========================================================================================
+
+% tables and figures
+
+    % \usepackage{booktabs}
+    % \setlength\heavyrulewidth{0.15ex}\setlength\cmidrulewidth{0.1ex}\setlength\lightrulewidth{0.1ex}
+    
+    % \usepackage[font=normalsize,labelfont=bf]{caption}\captionsetup[table]{aboveskip=2pt}\captionsetup[figure]{skip=8pt}
+    % \setlength{\textfloatsep}{9pt plus 1.0pt minus 2.0pt} % adjust space from caption to body text
+
+% ==========================================================================================
+% ==========================================================================================
+% ==========================================================================================
+
+% section headers
+    
+    % \usepackage{titlesec}
+    % \titleformat{\section}{\large\bfseries}{\thetitle.}{.5em}{}
+    % \titleformat{\subsection}{\bfseries}{\thesubsection.}{.5em}{}
+    % \titleformat{\subsubsection}{\itshape}{\thesubsubsection.}{.5em}{}
+    % \makeatletter\def\@seccntformat#1{\llap{\csname the#1\endcsname\quad}}\makeatother %this puts header numbers in margin
+
+% ==========================================================================================
+% ==========================================================================================
+% ==========================================================================================
+
+% environments
+
+    % \usepackage{enumerate}
+    
+    % \newenvironment{qnumerate}
+    % {\begin{enumerate}[\bf{Q}1.]}{\end{enumerate}}
+    
+    % \newenvironment{anumerate}
+    % {\begin{enumerate}[\bf(a)]}{\end{enumerate}}
+
+% ==========================================================================================
+% ==========================================================================================
+% ==========================================================================================
+
+% fancy page headers - use \pagestyle{custom} in body
+
+    % \usepackage{lastpage}
+    % \usepackage{fancyhdr} 
+    % \renewcommand{\headrulewidth}{0pt} % this is the header hrule line
+    % \setlength{\headsep}{0.2in}
+    % \setlength{\headheight}{13.7pt}
+
+    % \fancypagestyle{custom}
+     %  {
+      %   \fancyhead[L]{}
+      %   \fancyhead[R]{}
+      %   \fancyfoot[C]{Page \thepage\ of \pageref{LastPage}}
+      %   \fancyfoot[C]{\thepage}
+     %  } 
+    % \pagestyle{custom}
+
+% ==========================================================================================
+% ==========================================================================================
+% ==========================================================================================
+
+% macros
+    
+    % \newcommand*\supr[1]{$^{#1}$}
+    % \newcommand*\sub[1]{$_{#1}$}
+    % \newcommand*\unit[1]{\textnormal{ #1}}
+    % \newcommand*\rsq[1]{Correlation coefficient for line of best fit $R^2=#1$}
+
+% ==========================================================================================
+% ==========================================================================================
+% ==========================================================================================
+
+% labels
+
+    % \def\tablab{Table}\def\tabslab{\tablab s}
+    % \def\figlab{Figure}\def\figslab{\figlab s}
+    % \def\equlab{Eq.}\def\equslab{Eqs.}
+    % \newcommand*\eq[1]{\equlab~\ref{#1}}
+    % \newcommand*\eqs[1]{\equslab~\ref{#1}}
+    % \newcommand*\tbl[1]{\tablab~\ref{#1}}
+    % \newcommand*\fig[1]{\figlab~\ref{#1}}
+    % \newcommand*\figs[1]{\figslab~\ref{#1}}
+
+% ==========================================================================================
+% ==========================================================================================
+% ==========================================================================================
+
+% shortcuts
+
+    % \def\myrr{\textsuperscript{\tiny\textregistered}}
+    % \def\deg{$^{\circ}$}
+    % \def\tild{$\sim$}
+    % \def\dg{$\Delta G$}
+    % \def\electron{e$^-$}
+    % \def\Ecell{$\mathscr{E}_{\textnormal{cell}}$}
+    % \def\Enotcell{$\mathscr{E}^{\circ}_{\textnormal{cell}}$}
+    % \def\Enot{$\mathscr{E}^{\circ}$}
+    % \def\not{^\circ}
+    % \def\Ka{$K_{\textnormal{a}}$}
+    % \def\Ksp{$K_{\textnormal{sp}}$}
+    % \def\Keq{$K_{\textnormal{eq}}$}
+    % \def\pKa{p$K_{\textnormal{a}}$}
+    % \def\dipole{+\hspace*{-3mm}$\longrightarrow$}
+    % \def\cmi{cm$^{-1}$}
+    % \def\cd{$\cdot$}
+    % \def\dd{\end{document}} % useful for debugging
+
+% fractions
+    
+    % \usepackage{nicefrac}
+    % \def\half{\nicefrac{1}{2}}
+    % \def\third{\nicefrac{1}{3}}
+    % \def\quarter{\nicefrac{1}{4}}
+    % \def\threequarter{\nicefrac{3}{4}}
+    % \def\twothird{\nicefrac{2}{3}}
+
+
+% ==========================================================================================
+% ==========================================================================================
+% ==========================================================================================
+
+% hyperref, load last
+
+    % \usepackage{hyperref}\hypersetup{colorlinks = true, urlcolor = blue}
+
+% ==========================================================================================
+% ==========================================================================================
+% ==========================================================================================
+
+\title{Document Title}
+\author{John Terhorst}
+\date{\today}
+
+
+\begin{document}
+
+\maketitle
+
+Health goth letterpress portland chicharrones cornhole ethical. Coloring book dreamcatcher ethical single-origin coffee listicle, tacos venmo enamel pin retro bushwick. 
+
+\end{document}
+
+% ==========================================================================================
+% ==========================================================================================
+% ==========================================================================================
+
+% notes
+
+    %          with symbol, use \footnote[2]{text}
+    %          instead of 2 you can put the number of the symbol you like:
+    %          1   asterisk *   
+    %          2   dagger  
+    %          3   double dagger  
+    %          4   section symbol §   
+    %          5   paragraph ¶   
+    %          6   parallel lines  
+    %          7   two asterisks 
+    %          8   two daggers 
+    %          9   two double daggers 
+    
+\begin{center}
+\ce{
+  Zn^2+
+  <=>[+ 2OH-][+ 2H+]
+  $\underset{\text{amphoteres Hydroxid}}{\ce{Zn(OH)2 v}}$
+  <=>[+ 2OH-][+ 2H+]
+  $\underset{\text{Hydroxozikat}}{\ce{[Zn(OH)4]^2-}}$
+  + H2 ^
+}
+\end{center}    
+
+\begin{align*}
+  \ce{ A + B &->[+e] C \\
+           C &->[+e] D + E }
+\end{align*}
+
