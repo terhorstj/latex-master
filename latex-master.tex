@@ -55,10 +55,11 @@
 
 % section headers
     
-    % \usepackage{titlesec}
-    % \titleformat{\section}{\large\bfseries}{\thetitle.}{.5em}{}
-    % \titleformat{\subsection}{\bfseries}{\thesubsection.}{.5em}{}
-    % \titleformat{\subsubsection}{\itshape}{\thesubsubsection.}{.5em}{}
+    % \usepackage[explicit]{titlesec} % use [explicit] to include arg #1 as in example for underline
+    % \titleformat{\section}[block]{\bfseries\filcenter}{}{1em}{#1} % centered title
+    % \titleformat{\section}{\bfseries}{\thetitle.}{.5em}{#1}
+    % \titleformat{\subsection}{\normalfont}{\thesubsection.}{.5em}{\uline{#1}} % requires ulem
+    % \titleformat{\subsubsection*}{\itshape}{\thesubsubsection*.}{.5em}{}
     % \makeatletter\def\@seccntformat#1{\llap{\csname the#1\endcsname\quad}}\makeatother %this puts header numbers in margin
 
 % ==========================================================================================
