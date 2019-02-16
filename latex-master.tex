@@ -2,7 +2,18 @@
 % ==========================================================================================
 % ==========================================================================================
 
-    \documentclass[12pt]{article}
+    \def\myname{John Terhorst}
+    \def\myshortname{Terhorst, J.}
+    \def\mydoctitle{Document Title}
+
+% ==========================================================================================
+% ==========================================================================================
+% ==========================================================================================
+
+    %\documentclass[11pt]{article}
+    \documentclass[titlepage,11pt]{article}
+    %\documentclass[twocolumn,11pt]{article}
+    \def\mymargins{1.1in}\usepackage[top=\mymargins, bottom=\mymargins, left=\mymargins, right=\mymargins]{geometry} % showframe
 
 % ==========================================================================================
 % ==========================================================================================
@@ -11,18 +22,17 @@
 % basic setup
 
      \usepackage[T1]{fontenc}
-     \usepackage{microtype}
-    % \usepackage{graphicx}
-    % \usepackage{fullpage} 
-    % \usepackage{parskip}
-    % \usepackage{authblk} % activate if using \maketitle
-    % graphicx,verbatim,textcomp,siunitx,amsmath,amssymb,mathrsfs,textgreek,float,ulem
+     \usepackage{microtype,ulem}
     % \usepackage[version=4]{mhchem}
+    % \usepackage{graphicx}
+    % \usepackage{fullpage} % better to use geometry
+    % \usepackage{parskip}
+    % \usepackage{authblk} 
+    % verbatim,textcomp,siunitx,amsmath,amssymb,mathrsfs,textgreek,float,ulem
     % \usepackage{tikz} % remove if no tikz
     % \usepackage{mathptmx}   
-    % \usepackage{enumitem} 
-    % \def\mymargins{1.3in}\usepackage[top=\mymargins, bottom=\mymargins, left=\mymargins, right=\mymargins]{geometry}
-    % \usepackage{chemfig}\setchemfig{atom sep=2em}\setchemfig{angle increment=30} % see chemfif
+    % \usepackage{enumitem} % use [noitemsep] in itemize 
+    % \usepackage{chemfig}\setchemfig{atom sep=2em}\setchemfig{angle increment=30} % see chemfig
     % \usepackage[bottom,hang,symbol]{footmisc}\setlength\footnotemargin{9pt}\interfootnotelinepenalty=10000\setlength{\skip\footins}{0.5cm}  
     % \usepackage{setspace}\setstretch{1.1}
     
@@ -55,12 +65,18 @@
 
 % section headers
     
-    % \usepackage[explicit]{titlesec} % use [explicit] to include arg #1 as in example for underline
-    % \titleformat{\section}[block]{\bfseries\filcenter}{}{1em}{#1} % centered title
+     \usepackage[explicit]{titlesec} % use [explicit] to include arg #1 as in example for underline
+     \titleformat{\section}[block]{\filcenter}{\thetitle.}{0.5em}{\textsc{#1}} % centered title
     % \titleformat{\section}{\bfseries}{\thetitle.}{.5em}{#1}
-    % \titleformat{\subsection}{\normalfont}{\thesubsection.}{.5em}{\uline{#1}} % requires ulem
+     \titleformat{\subsection}{\normalfont}{\thesubsection.}{.5em}{\uline{#1}} % requires ulem
+    % \titleformat{\subsection}{\itshape}{\thesubsection.}{.5em}{\uline{#1}}
     % \titleformat{\subsubsection*}{\itshape}{\thesubsubsection*.}{.5em}{}
     % \makeatletter\def\@seccntformat#1{\llap{\csname the#1\endcsname\quad}}\makeatother %this puts header numbers in margin
+
+    %                       indent    vskip before               vskip after
+    % \titlespacing\section{0pt}{13pt plus 0pt minus 0pt}{11pt plus 0pt minus 0pt}
+    % \titlespacing\subsection{0pt}{13pt plus 0pt minus 0pt}{11pt plus 0pt minus 0pt}
+    % \titlespacing\paragraph{0pt}{13pt plus 0pt minus 0pt}{5pt plus 2pt minus 2pt}
 
 % ==========================================================================================
 % ==========================================================================================
@@ -80,13 +96,27 @@
 % ==========================================================================================
 % ==========================================================================================
 
-% fancy page headers - use \pagestyle{custom} in body
+% fancy page headers
+
+    % built-in function
+    % \pagestyle{myheadings}
+    % \markboth{left}{\textnormal{\myshortname} \textit{\mydoctitle}}
 
     % \usepackage{lastpage}
     % \usepackage{fancyhdr} 
     % \renewcommand{\headrulewidth}{0pt} % this is the header hrule line
     % \setlength{\headsep}{0.2in}
     % \setlength{\headheight}{13.7pt}
+
+    % \usepackage{fancyhdr} 
+    %        \lhead{} 
+    %        \chead{} 
+    %        \rhead{\textit{\mydoctitle}} 
+    %        \lfoot{} 
+    %        \cfoot{\thepage}
+    %        \rfoot{} 
+    %        \setlength{\headheight}{14.5pt}
+    %        \pagestyle{fancy} % empty, plain, fancy - use \thispagestyle{fancy} for indiv pages
 
     % \fancypagestyle{custom}
      %  {
@@ -106,7 +136,7 @@
     % \newcommand*\supr[1]{$^{#1}$}
     % \newcommand*\sub[1]{$_{#1}$}
     % \newcommand*\unit[1]{\textnormal{ #1}}
-    % \newcommand*\rsq[1]{Correlation coefficient for line of best fit $R^2=#1$}
+    % \newcommand*\rsq[1]{Correlation coefficient for line of best fit is $R^2=#1$}
 
 % ==========================================================================================
 % ==========================================================================================
@@ -163,25 +193,73 @@
 
 % hyperref, load last
 
-    % \usepackage{hyperref}\hypersetup{colorlinks = true, urlcolor = blue}
+    % \usepackage{hyperref}
+    % \hypersetup{ colorlinks = false,
+    %              urlcolor = black,
+    %              pdfauthor = {\myname},
+    %              pdfkeywords = {\mydoctitle},
+    %              pdftitle = {\mydoctitle},
+    %              pdfsubject = {\mydoctitle},
+    %              pdfpagemode = UseNone }
 
 % ==========================================================================================
 % ==========================================================================================
 % ==========================================================================================
 
-\title{Document Title}
-\author{John Terhorst}
-\date{\today}
+\title{\vspace*{-1.51cm}\mydoctitle\vspace*{-.5cm}}
+\author{\normalsize\myname}
+\date{\vspace*{-.3cm}\normalsize\today\vspace*{-.2cm}}
 
 
 \begin{document}
 
 \maketitle
 
+\section*{Introduction}
+
+Health goth letterpress portland chicharrones cornhole ethical. Coloring book dreamcatcher ethical single-origin coffee listicle, tacos venmo enamel pin retro bushwick. Polaroid deep vee umami, locavore subway tile adaptogen crucifix kickstarter pour-over waistcoat cliche selvage. Migas echo park next level salvia art party. Kinfolk etsy you probably haven't heard of them kickstarter narwhal, fingerstache schlitz disrupt meggings three wolf moon twee waistcoat actually austin organic. Yr hot chicken cardigan, fanny pack leggings tbh next level cornhole.
+
+\section*{Procedure}
+
+Health goth letterpress portland chicharrones cornhole ethical. Coloring book dreamcatcher ethical single-origin coffee listicle, tacos venmo enamel pin retro bushwick. Polaroid deep vee umami, locavore subway tile adaptogen crucifix kickstarter pour-over waistcoat cliche selvage. Migas echo park next level salvia art party. Kinfolk etsy you probably haven't heard of them kickstarter narwhal, fingerstache schlitz disrupt meggings three wolf moon twee waistcoat actually austin organic. Yr hot chicken cardigan, fanny pack leggings tbh next level cornhole.
+
+\subsection*{Preparing Solutions}
+
+Health goth letterpress portland chicharrones cornhole ethical. Coloring book dreamcatcher ethical single-origin coffee listicle, tacos venmo enamel pin retro bushwick. Polaroid deep vee umami, locavore subway tile adaptogen crucifix kickstarter pour-over waistcoat cliche selvage. Migas echo park next level salvia art party. Kinfolk etsy you probably haven't heard of them kickstarter narwhal, fingerstache schlitz disrupt meggings three wolf moon twee waistcoat actually austin organic. Yr hot chicken cardigan, fanny pack leggings tbh next level cornhole.
+
+\subsection*{Calibration of Equipment} 
+
 Health goth letterpress portland chicharrones cornhole ethical. Coloring book dreamcatcher ethical single-origin coffee listicle, tacos venmo enamel pin retro bushwick. 
+
+\begin{enumerate}
+
+    \item Polaroid deep vee umami, locavore subway tile adaptogen crucifix kickstarter pour-over waistcoat cliche selvage. Migas echo park next level salvia art party. Kinfolk etsy you probably haven't heard of them kickstarter narwhal, fingerstache schlitz disrupt meggings three wolf moon twee waistcoat actually austin organic. Yr hot chicken cardigan, fanny pack leggings tbh next level cornhole.
+
+    \item Polaroid deep vee umami, locavore subway tile adaptogen crucifix kickstarter pour-over waistcoat cliche selvage. Migas echo park next level salvia art party. Kinfolk etsy you probably haven't heard of them kickstarter narwhal, fingerstache schlitz disrupt meggings three wolf moon twee waistcoat actually austin organic. Yr hot chicken cardigan, fanny pack leggings tbh next level cornhole.
+
+    \item Polaroid deep vee umami, locavore subway tile adaptogen crucifix kickstarter pour-over waistcoat cliche selvage. Migas echo park next level salvia art party. Kinfolk etsy you probably haven't heard of them kickstarter narwhal, fingerstache schlitz disrupt meggings three wolf moon twee waistcoat actually austin organic. Yr hot chicken cardigan, fanny pack leggings tbh next level cornhole.
+
+\end{enumerate}
 
 \end{document}
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+% ==========================================================================================
+% ==========================================================================================
+% ==========================================================================================
 % ==========================================================================================
 % ==========================================================================================
 % ==========================================================================================
@@ -199,7 +277,9 @@ Health goth letterpress portland chicharrones cornhole ethical. Coloring book dr
     %          7   two asterisks 
     %          8   two daggers 
     %          9   two double daggers 
-    
+
+% some fancy chem notation examples
+
 \begin{center}
 \ce{
   Zn^2+
@@ -210,6 +290,8 @@ Health goth letterpress portland chicharrones cornhole ethical. Coloring book dr
   + H2 ^
 }
 \end{center}    
+
+% align environment
 
 \begin{align*}
   \ce{ A + B &->[+e] C \\
