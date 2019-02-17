@@ -5,15 +5,17 @@
     \def\myname{John Terhorst}
     \def\myshortname{Terhorst, J.}
     \def\mydoctitle{Document Title}
-
+    \def\myfontsize{11pt}
+    \def\mymargins{1.1in}
+    
 % ==========================================================================================
 % ==========================================================================================
 % ==========================================================================================
 
-    %\documentclass[11pt]{article}
-    \documentclass[titlepage,11pt]{article}
-    %\documentclass[twocolumn,11pt]{article}
-    \def\mymargins{1.1in}\usepackage[top=\mymargins, bottom=\mymargins, left=\mymargins, right=\mymargins]{geometry} % showframe
+    %\documentclass[letterpaper,\myfontsize]{article}
+    \documentclass[letterpaper,titlepage,\myfontsize]{article}
+    %\documentclass[letterpaper,twocolumn,\myfontsize]{article}
+    \usepackage[top=\mymargins, bottom=\mymargins, left=\mymargins, right=\mymargins]{geometry} % showframe
 
 % ==========================================================================================
 % ==========================================================================================
@@ -22,7 +24,7 @@
 % basic setup
 
      \usepackage[T1]{fontenc}
-     \usepackage{microtype,ulem}
+     \usepackage{microtype}
     % \usepackage[version=4]{mhchem}
     % \usepackage{graphicx}
     % \usepackage{fullpage} % better to use geometry
