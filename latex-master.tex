@@ -5,8 +5,8 @@
     \def\myname{John Terhorst}
     \def\myshortname{Terhorst, J.}
     \def\mydoctitle{Document Title}
-    \def\myfontsize{11pt}
-    \def\mymargins{1.1in}
+    \def\myfontsize{10pt}
+    \def\mymargins{1.25in}
     
 % ==========================================================================================
 % ==========================================================================================
@@ -46,8 +46,11 @@
 
     % \usepackage[super,comma,sort&compress]{natbib}
     % \renewcommand{\bibnumfmt}[1]{#1.}
+    % \renewcommand{\refname}{References}
     % \let\oldbibliography\thebibliography\renewcommand{\thebibliography}[1]{\oldbibliography{#1}\setlength{\itemsep}{3pt}}
-    % \newcommand*\myref[6]{\bibitem{#1}#2 \textit{#3} \textbf{#4}, \textit{#5}, #6.} 
+    % \newcommand*\myaref[6]{\bibitem{#1}#2 \textit{#3} \textbf{#4}, \textit{#5}, #6.} 
+    % \newcommand*\mytref[7]{\bibitem{#1}#2 ``#3.'' \textit{#4} \textbf{#5}, \textit{#6}, #7.} 
+    % \newcommand*\myzref[8]{\bibitem{#1}#2 ``#3.'' \textit{#4} \textbf{#5}, \textit{#6}(#7), #8.} 
 
 % ==========================================================================================
 % ==========================================================================================
@@ -67,10 +70,12 @@
 
 % section headers
     
-     \usepackage[explicit]{titlesec} % use [explicit] to include arg #1 as in example for underline
-     \titleformat{\section}[block]{\filcenter}{\thetitle.}{0.5em}{\textsc{#1}} % centered title
-    % \titleformat{\section}{\bfseries}{\thetitle.}{.5em}{#1}
-     \titleformat{\subsection}{\normalfont}{\thesubsection.}{.5em}{\uline{#1}} % requires ulem
+     \usepackage{titlesec} 
+    % \usepackage[explicit]{titlesec} % use [explicit] to include arg #1 as in example for underline
+    % \titleformat{\section}[block]{\filcenter}{\thetitle.}{0.5em}{\textsc{#1}} % centered title
+     \titleformat{\section}{\bfseries}{\thetitle.}{.5em}{}
+     \titleformat{\subsection}{\itshape}{\thetitle.}{.5em}{}
+    % \titleformat{\subsection}{\normalfont}{\thesubsection.}{.5em}{\uline{#1}} % requires ulem
     % \titleformat{\subsection}{\itshape}{\thesubsection.}{.5em}{\uline{#1}}
     % \titleformat{\subsubsection*}{\itshape}{\thesubsubsection*.}{.5em}{}
     % \makeatletter\def\@seccntformat#1{\llap{\csname the#1\endcsname\quad}}\makeatother %this puts header numbers in margin
@@ -79,6 +84,14 @@
     % \titlespacing\section{0pt}{13pt plus 0pt minus 0pt}{11pt plus 0pt minus 0pt}
     % \titlespacing\subsection{0pt}{13pt plus 0pt minus 0pt}{11pt plus 0pt minus 0pt}
     % \titlespacing\paragraph{0pt}{13pt plus 0pt minus 0pt}{5pt plus 2pt minus 2pt}
+
+% ==========================================================================================
+% ==========================================================================================
+% ==========================================================================================
+
+% TOC stuff
+
+     \usepackage{titletoc}
 
 % ==========================================================================================
 % ==========================================================================================
@@ -195,8 +208,10 @@
 
 % hyperref, load last
 
-    % \usepackage{hyperref}
-    % \hypersetup{ colorlinks = false,
+    % \PassOptionsToPackage{hyphens}{url} % hyperref uses url package; this enables extra hyphenation for long urls
+    % \usepackage[pdftex]{hyperref}
+    % \urlstyle{same} % use roman instead of typewriter for url
+    % \hypersetup{ colorlinks = true,
     %              urlcolor = black,
     %              pdfauthor = {\myname},
     %              pdfkeywords = {\mydoctitle},
@@ -208,40 +223,72 @@
 % ==========================================================================================
 % ==========================================================================================
 
-\title{\vspace*{-1.51cm}\mydoctitle\vspace*{-.5cm}}
-\author{\normalsize\myname}
-\date{\vspace*{-.3cm}\normalsize\today\vspace*{-.2cm}}
+% maketitle definitions
+
+\title{\vspace*{-1.51cm}\mydoctitle}
+%\author{\normalsize\myname}
+\date{\today}
+
+\usepackage{authblk}
+    \author[1,2]{\myname}
+    \author[2]{Erin Schwartz}
+    \author[2]{Heather Glasser}
+    \affil[1]{Division of Natural Sciences, Vanguard University, Costa Mesa, CA 92626}
+    \affil[2]{Department of Chemistry, University of Redlands, Redlands, CA, 92373}
+
+\begin{document}%\maketitle
 
 
-\begin{document}
+% ==========================================================================================
+% ==========================================================================================
+% ==========================================================================================
 
+% front matter
+
+\pagestyle{empty}
 \maketitle
+	\tableofcontents
+		\newpage
+    		\setcounter{page}{1}
+    		\pagenumbering{roman}
+    		\pagestyle{plain}
+    		\addcontentsline{toc}{section}{List of Figures}
+    		\listoffigures
+		\newpage
+			\addcontentsline{toc}{section}{List of Tables}
+			\listoftables
+			\newpage
+\setcounter{page}{1}
+\pagenumbering{arabic}
 
-\section*{Introduction}
+% ==========================================================================================
+% ==========================================================================================
+% ==========================================================================================
+
+\section{Introduction}
 
 Health goth letterpress portland chicharrones cornhole ethical. Coloring book dreamcatcher ethical single-origin coffee listicle, tacos venmo enamel pin retro bushwick. Polaroid deep vee umami, locavore subway tile adaptogen crucifix kickstarter pour-over waistcoat cliche selvage. Migas echo park next level salvia art party. Kinfolk etsy you probably haven't heard of them kickstarter narwhal, fingerstache schlitz disrupt meggings three wolf moon twee waistcoat actually austin organic. Yr hot chicken cardigan, fanny pack leggings tbh next level cornhole.
 
-\section*{Procedure}
+\begin{figure}[htbp]
+	\centering
+        A
+        \caption{The pairwise nature of the Born radius.}
+		\label{bornrad}
+\end{figure}
+
+\begin{table}[htbp]
+	\centering
+	\caption{Gravimetric analysis of silver halides in a 1.27-mL sample of Salton Sea water.}
+    B
+	\label{tabgrav}
+\end{table}
+
+\subsection{Procedure}
 
 Health goth letterpress portland chicharrones cornhole ethical. Coloring book dreamcatcher ethical single-origin coffee listicle, tacos venmo enamel pin retro bushwick. Polaroid deep vee umami, locavore subway tile adaptogen crucifix kickstarter pour-over waistcoat cliche selvage. Migas echo park next level salvia art party. Kinfolk etsy you probably haven't heard of them kickstarter narwhal, fingerstache schlitz disrupt meggings three wolf moon twee waistcoat actually austin organic. Yr hot chicken cardigan, fanny pack leggings tbh next level cornhole.
 
-\subsection*{Preparing Solutions}
 
-Health goth letterpress portland chicharrones cornhole ethical. Coloring book dreamcatcher ethical single-origin coffee listicle, tacos venmo enamel pin retro bushwick. Polaroid deep vee umami, locavore subway tile adaptogen crucifix kickstarter pour-over waistcoat cliche selvage. Migas echo park next level salvia art party. Kinfolk etsy you probably haven't heard of them kickstarter narwhal, fingerstache schlitz disrupt meggings three wolf moon twee waistcoat actually austin organic. Yr hot chicken cardigan, fanny pack leggings tbh next level cornhole.
 
-\subsection*{Calibration of Equipment} 
-
-Health goth letterpress portland chicharrones cornhole ethical. Coloring book dreamcatcher ethical single-origin coffee listicle, tacos venmo enamel pin retro bushwick. 
-
-\begin{enumerate}
-
-    \item Polaroid deep vee umami, locavore subway tile adaptogen crucifix kickstarter pour-over waistcoat cliche selvage. Migas echo park next level salvia art party. Kinfolk etsy you probably haven't heard of them kickstarter narwhal, fingerstache schlitz disrupt meggings three wolf moon twee waistcoat actually austin organic. Yr hot chicken cardigan, fanny pack leggings tbh next level cornhole.
-
-    \item Polaroid deep vee umami, locavore subway tile adaptogen crucifix kickstarter pour-over waistcoat cliche selvage. Migas echo park next level salvia art party. Kinfolk etsy you probably haven't heard of them kickstarter narwhal, fingerstache schlitz disrupt meggings three wolf moon twee waistcoat actually austin organic. Yr hot chicken cardigan, fanny pack leggings tbh next level cornhole.
-
-    \item Polaroid deep vee umami, locavore subway tile adaptogen crucifix kickstarter pour-over waistcoat cliche selvage. Migas echo park next level salvia art party. Kinfolk etsy you probably haven't heard of them kickstarter narwhal, fingerstache schlitz disrupt meggings three wolf moon twee waistcoat actually austin organic. Yr hot chicken cardigan, fanny pack leggings tbh next level cornhole.
-
-\end{enumerate}
 
 \end{document}
 
@@ -262,6 +309,15 @@ Health goth letterpress portland chicharrones cornhole ethical. Coloring book dr
 % ==========================================================================================
 % ==========================================================================================
 % ==========================================================================================
+
+\newpage
+\addcontentsline{toc}{section}{References}
+\bibliographystyle{plainnat}
+\begin{thebibliography}{200}
+\mytref{heitler}{Heitler, W.; London, F.}{Wechselwirkung neutraler Atome und hom\"oopolare Bindung nach der Quantenmechanik}{Phys.\ Lett.}{1927}{44}{455--473}
+\myzref{ez}{Terhorst, J.\ P.; Jorgensen, W.\ L.}{$E/Z$ Energetics for Molecular Modeling and Design}{J.\ Chem.\ Theory Comput.}{2010}{6}{9}{2762--2769}
+\end{thebibliography}
+
 % ==========================================================================================
 % ==========================================================================================
 % ==========================================================================================

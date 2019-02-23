@@ -72,6 +72,7 @@ At this point, we have enough information to build a bare-bones document without
 
 * ```\usepackage{mathptmx}``` - This package redefines the main serif font as Times (*not* Times New Roman), including (most importantly) math support; it redefines the sans serif font as Helvetica; and it redefines the typewriter (monospace) font as Courier. 
 
+* ```\usepackage{enumitem}``` - 
 
 
 
