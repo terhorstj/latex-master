@@ -74,6 +74,14 @@
 
 % section headers - \bfseries, \rmseries, \itshape, \slshape (use instead of \it for sffamily), \scshape
 
+\begin{comment}
+		\titleformat{\section}
+		{} % - formatting of entire slug
+		{} % - the section number via \thesection
+		{.25em} % - distance between number and section title
+		{} % - goes before section title but after the section number, can include formatting not applied to the number
+\end{comment}
+
 \usepackage{titlesec} 
 % \usepackage[explicit]{titlesec} % use [explicit] to include arg #1 as in example for underline
 % \titleformat{\section}[block]{\filcenter}{\thetitle.}{0.5em}{\textsc{#1}} % centered title - very nice as \section*
