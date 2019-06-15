@@ -29,6 +29,7 @@
 \usepackage{microtype,verbatim}
 % \usepackage[version=4]{mhchem}  % use arrows=pgf-filled if using mathptmx or newtxtext/newtxmath
 \usepackage{parskip}
+\usepackage{subtext} % very useful -- use as $\Delta G_[pol]$ vs $\Delta G_\textnormal{pol}$
 % \usepackage{ulem}
 % textcomp,siunitx,textgreek,float
 % \usepackage[calligra]{emf} % alternate to mathrsfs \mathscr{E}
@@ -76,7 +77,8 @@
 \usepackage{titlesec} 
 % \usepackage[explicit]{titlesec} % use [explicit] to include arg #1 as in example for underline
 % \titleformat{\section}[block]{\filcenter}{\thetitle.}{0.5em}{\textsc{#1}} % centered title - very nice as \section*
-% \titleformat{\section}{\bbb\bfseries}{\thetitle.}{.5em}{}
+% \titleformat{\section}{\bfseries}{\thetitle.}{.5em}{}
+% \titleformat{\section}[runin]{\large\bfseries}{\thetitle.}{.5em}{} - use [runin] to put text inline like \paragraph
 \titleformat{\section}{\large\bfseries}{\thetitle.}{.5em}{}
 \titleformat{\subsection}{\large\bfseries}{\thetitle.}{.5em}{}
 % \titleformat{\subsection}{\normalsize\itshape}{\thetitle.}{.5em}{}
