@@ -24,22 +24,21 @@
 % basic setup - for font packages see http://www.tug.dk/FontCatalogue/
 
 % \renewcommand{\familydefault}{\sfdefault}   % \rmdefault, \sfdefault, \ttdefault
-% \usepackage[T1]{fontenc} % use for accented chars like \"o or \AA or \'e
+% \usepackage[T1]{fontenc} % use for documents with lots of accented chars like \"o or \AA or \'e
 % \usepackage[tracking=true,kerning=true,factor=1100,stretch=10,shrink=10]{microtype}
 \usepackage{microtype,verbatim}
 % \usepackage[version=4]{mhchem}  % use arrows=pgf-filled if using mathptmx or newtxtext/newtxmath
 \usepackage{parskip}
-\usepackage{subtext} % very useful -- use as $\Delta G_[pol]$ vs $\Delta G_\textnormal{pol}$
+% \usepackage{subtext} % very useful -- use as $\Delta G_[pol]$ vs $\Delta G_\textnormal{pol}$
+\usepackage{siunitx}
 % \usepackage{ulem}
-% textcomp,siunitx,textgreek,float
-% \usepackage[calligra]{emf} % alternate to mathrsfs \mathscr{E}
+% textcomp,textgreek,float
 % \usepackage{tikz} % remove if no tikz
 % \usepackage{mathptmx}   
 % \usepackage{enumitem} % can use [noitemsep] in itemize 
-% \usepackage{chemfig}\setchemfig{atom sep=2em}\setchemfig{angle increment=30} % see chemfig
 % \usepackage[bottom,hang,symbol]{footmisc}\setlength\footnotemargin{9pt}\interfootnotelinepenalty=10000\setlength{\skip\footins}{0.5cm}  % if used, must go after setspace
 % \usepackage{setspace}\setstretch{1.1} % if used, must go before geometry
-\usepackage[all]{nowidow} % widow/orphan prevention
+% \usepackage[all]{nowidow} % widow/orphan prevention
 
 % ==========================================================================================
 % ==========================================================================================
@@ -65,7 +64,8 @@
 \setlength\heavyrulewidth{0.15ex}\setlength\cmidrulewidth{0.1ex}\setlength\lightrulewidth{0.1ex}
 
 \usepackage{graphicx}
-\usepackage[font=normalsize,labelfont={bf},margin=1in]{caption}\captionsetup[table]{aboveskip=3pt}\captionsetup[figure]{skip=3pt}
+%\usepackage[font=normalsize,labelfont={bf},margin=1in]{caption}\captionsetup[table]{aboveskip=3pt}\captionsetup[figure]{skip=3pt}
+\usepackage[font=normalsize,labelfont={bf}]{caption}\captionsetup[table]{aboveskip=3pt}\captionsetup[figure]{skip=3pt}
 % \setlength{\textfloatsep}{9pt plus 1.0pt minus 2.0pt} % adjust space from caption to body text
 
 % ==========================================================================================
@@ -240,6 +240,11 @@
 % \def\threequarter{\nicefrac{3}{4}}
 % \def\twothird{\nicefrac{2}{3}}
 
+% \newif\ifweb
+% \webfalse % \webtrue
+% \ifweb  
+% \else
+% \fi
 
 % ==========================================================================================
 % ==========================================================================================
@@ -276,7 +281,7 @@
 \affil[1]{Division of Natural Sciences, Vanguard University, Costa Mesa, CA 92626}
 \affil[2]{Department of Chemistry, University of Redlands, Redlands, CA, 92373}
 
-\begin{document}%\maketitle
+\begin{document}
 
 
 % ==========================================================================================
@@ -322,17 +327,23 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 
 Duis tristique sollicitudin nibh sit amet commodo nulla. Bibendum est ultricies integer quis. Purus ut faucibus pulvinar elementum integer enim. Pretium lectus quam id leo in vitae turpis massa. Vulputate enim nulla aliquet porttitor lacus luctus accumsan. Sapien et ligula ullamcorper malesuada proin libero nunc consequat. Tortor id aliquet lectus proin nibh nisl condimentum id. Nibh tortor id aliquet lectus proin nibh nisl.
 
-\begin{table}[htbp]
-\centering
-\caption{Gravimetric analysis of silver halides in a 1.27-mL sample of Salton Sea water.}
-\begin{tabular}{cc}
-\toprule
-A & B \\
-\midrule
-C & D \\
-\bottomrule      
-\end{tabular}
-\label{tabgrav}
+\begin{table}[ht]
+	\centering
+	\caption{Gravimetric analysis of silver halides in a 1.27-mL sample of Salton Sea water.}
+		\begin{tabular}{rSSScS}
+			\toprule
+				\multicolumn{1}{c}{}             & \multicolumn{4}{c}{Test Tubes}\\
+				\cmidrule(rl){2-5} 
+					Qty of Sample                & A             & B             & C             & D      & Avg             \\
+				\cmidrule(r){1-1} \cmidrule(rl){2-5} \cmidrule(l){6-6}
+					Mass (g)                     & 1.399         & 1.32          & 1.328         & 1.408  & 1.364           \\
+					Density (g/mL)               & 1.10          & 1.04          & 1.05          & 1.109  & 1.07            \\
+					Mass w/ Precipitate (g)      & 13.443        & 13.401        & 13.348        & ---    & 13.397          \\
+					Mass AgCl (\num{e-2} g)      & 9.0           & 9.2           & 8.7           & ---    & 8.9             \\
+					Moles AgCl (\num{e-4} mol)   & 6.28          & 6.42          & 6.08          & ---    & 6.50            \\
+			\bottomrule
+		\end{tabular}
+	\label{tabgrav}
 \end{table}
 
 Tellus in hac habitasse platea. Lectus quam id leo in vitae turpis massa sed. A condimentum vitae sapien pellentesque habitant morbi tristique. Velit sed ullamcorper morbi tincidunt. Volutpat est velit egestas dui id ornare arcu. Ipsum dolor sit amet consectetur adipiscing elit duis tristique. Tellus orci ac auctor augue mauris augue neque. 
