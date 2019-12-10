@@ -16,6 +16,7 @@
 %\documentclass[letterpaper,titlepage,\myfontsize]{article}
 %\documentclass[letterpaper,twocolumn,\myfontsize]{article}
 \usepackage[top=\mymargins, bottom=\mymargins, left=\mymargins, right=\mymargins]{geometry} % showframe
+%\usepackage{typearea} % auto-calculate page layout
 
 % ==========================================================================================
 % ==========================================================================================
@@ -172,6 +173,34 @@
 % ==========================================================================================
 % ==========================================================================================
 
+% info box
+
+% Usage:
+% \begin{info}[optional title, defaults to "Info:"]
+% 	contents
+% \end{info}
+
+\usepackage[framemethod=tikz]{mdframed} % Allows defining custom boxed/framed environments
+\mdfdefinestyle{info}{%
+	topline=false, bottomline=false,
+	leftline=false, rightline=false,
+	nobreak,
+	singleextra={%
+		\fill[black](P-|O)circle[radius=0.4em];
+		\node at(P-|O){\color{white}\scriptsize\bf i};
+		\draw[very thick](P-|O)++(0,-0.8em)--(O);%--(O-|P);
+	}}
+% Define a custom environment for information
+\newenvironment{info}[1][Info:]{ % Set the default title to "Info:"
+	\medskip
+	\begin{mdframed}[style=info]
+		\noindent{\textbf{#1}}
+    }{ \end{mdframed} }
+
+% ==========================================================================================
+% ==========================================================================================
+% ==========================================================================================
+
 % labels
 
 % \def\tablab{Table}\def\tabslab{\tablab s}
@@ -252,7 +281,7 @@
 
 % hyperref, load last
 
-% \PassOptionsToPackage{hyphens}{url} % hyperref uses url package; this enables extra hyphenation for long urls
+% \PassOptionsToPackage{hyphens}{xurl} % hyperref uses url package; this enables extra hyphenation for long urls
 % \usepackage[pdftex]{hyperref}
 % \urlstyle{same} % use roman instead of typewriter for url
 % \hypersetup{ colorlinks = true,
@@ -313,7 +342,14 @@
 
 \section{Introduction}
 
-Health goth~\cite{heitlon,ez} letterpress portland chicharrones cornhole ethical. Coloring book dreamcatcher ethical single-origin coffee listicle, tacos venmo enamel pin retro bushwick. Polaroid deep vee umami, locavore subway tile adaptogen crucifix kickstarter pour-over waistcoat cliche selvage. Migas echo park next level salvia art party. Kinfolk etsy you probably haven't heard of them kickstarter narwhal, fingerstache schlitz disrupt meggings three wolf moon twee waistcoat actually austin organic. Yr hot chicken cardigan, fanny pack leggings tbh next level cornhole.
+Health goth~\cite{heitlon,ez} letterpress portland chicharrones cornhole ethical. Coloring book dreamcatcher ethical single-origin coffee listicle, tacos venmo enamel pin retro bushwick. Polaroid deep vee umami, locavore subway tile adaptogen crucifix kickstarter pour-over waistcoat cliche selvage. 
+
+\begin{description}
+	\item[Stoichiometry]
+			The relationship between the relative quantities of substances taking part in a reaction or forming a compound, typically a ratio of whole integers.
+	\item[Atomic mass]
+			The mass of an atom of a chemical element expressed in atomic mass units. It is approximately equivalent to the number of protons and neutrons in the atom (the mass number) or to the average number allowing for the relative abundances of different isotopes. 
+\end{description} 
 
 \smallskip
 \begin{figure}[htbp]
@@ -323,9 +359,11 @@ Health goth~\cite{heitlon,ez} letterpress portland chicharrones cornhole ethical
 \label{bornrad}
 \end{figure}%
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Feugiat vivamus at augue eget arcu. Donec et odio pellentesque diam volutpat commodo sed egestas egestas. Sem nulla pharetra diam sit amet. Sagittis purus sit amet volutpat consequat mauris. Urna cursus eget nunc scelerisque viverra mauris in aliquam. Nec dui nunc mattis enim. Rhoncus aenean vel elit scelerisque mauris pellentesque pulvinar. Cras fermentum odio eu feugiat pretium nibh ipsum. Luctus accumsan tortor posuere ac ut consequat semper. Suscipit tellus mauris a diam maecenas sed enim ut. Posuere lorem ipsum dolor sit amet consectetur adipiscing. 
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Feugiat vivamus at augue eget arcu. Donec et odio pellentesque diam volutpat commodo sed egestas egestas. Sem nulla pharetra diam sit amet. Sagittis purus sit amet volutpat consequat mauris. 
 
-Duis tristique sollicitudin nibh sit amet commodo nulla. Bibendum est ultricies integer quis. Purus ut faucibus pulvinar elementum integer enim. Pretium lectus quam id leo in vitae turpis massa. Vulputate enim nulla aliquet porttitor lacus luctus accumsan. Sapien et ligula ullamcorper malesuada proin libero nunc consequat. Tortor id aliquet lectus proin nibh nisl condimentum id. Nibh tortor id aliquet lectus proin nibh nisl.
+\begin{info} % Information block
+	This is an interesting piece of information, to which the reader should pay special attention. Fusce varius orci ac magna dapibus porttitor. In tempor leo a neque bibendum sollicitudin. Nulla pretium fermentum nisi, eget sodales magna facilisis eu. Praesent aliquet nulla ut bibendum lacinia. Donec vel mauris vulputate, commodo ligula ut, egestas orci. Suspendisse commodo odio sed hendrerit lobortis. Donec finibus eros erat, vel ornare enim mattis et.
+\end{info}
 
 \begin{table}[ht]
 	\centering
