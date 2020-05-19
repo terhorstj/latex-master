@@ -28,14 +28,15 @@
 % \usepackage[T1]{fontenc} % use for documents with lots of accented chars like \"o or \AA or \'e
 % \usepackage[tracking=true,kerning=true,factor=1100,stretch=10,shrink=10]{microtype}
 \usepackage{microtype,verbatim}
+%\usepackage{newtxtext,newtxmath} % use times with math support  
+%\usepackage{mathptmx,newtxmath} % use times with math support  
 % \usepackage[version=4]{mhchem}  % use arrows=pgf-filled if using mathptmx or newtxtext/newtxmath
 \usepackage{parskip}
-% \usepackage{subtext} % very useful -- use as $\Delta G_[pol]$ vs $\Delta G_\textnormal{pol}$
 \usepackage{siunitx}
-% \usepackage{ulem}
-% textcomp,textgreek,float
+\usepackage{textgreek} % upright greek in text mode; eg \textalpha
+% \usepackage{ulem} % use underline for \emph{}; provides better \uline{}; use [normalem] to keep \emph{} as italic
+% textcomp,float % other utility packages
 % \usepackage{tikz} % remove if no tikz
-% \usepackage{mathptmx}   
 % \usepackage{enumitem} % can use [noitemsep] in itemize 
 % \usepackage[bottom,hang,symbol]{footmisc}\setlength\footnotemargin{9pt}\interfootnotelinepenalty=10000\setlength{\skip\footins}{0.5cm}  % if used, must go after setspace
 % \usepackage{setspace}\setstretch{1.1} % if used, must go before geometry
@@ -197,6 +198,9 @@
 		\noindent{\textbf{#1}}
     }{ \end{mdframed} }
 
+\usepackage{subtext} % very useful -- use as $\Delta G_[pol]$ vs $\Delta G_\textnormal{pol}$
+                     % must be loaded after infobox code
+
 % ==========================================================================================
 % ==========================================================================================
 % ==========================================================================================
@@ -241,7 +245,7 @@
 % \def\dels{$\Delta S$}
 % \def\essnot{$S^\circ$}
 % \def\electron{e$^-$}
-% \def\Ecell{$\emf_{\hspace*{-.3mm}\textnormal{cell}}$}
+% \def\Ecell{$\emf_{\hspace*{-.3mm}\textnormal{cell}}$} % needs \usepackage[calligra]{emf}
 % \def\Enotcell{$\emf^{\hspace*{.5mm}\circ}_{\hspace*{-.3mm}\textnormal{cell}}$}
 % \def\Enot{$\emf^{\hspace*{.5mm}\circ}$}
 % \def\Ka{$K_{\textnormal{a}}$}
@@ -313,6 +317,8 @@
 \begin{document}
 
 
+
+
 % ==========================================================================================
 % ==========================================================================================
 % ==========================================================================================
@@ -343,6 +349,8 @@
 \section{Introduction}
 
 Health goth~\cite{heitlon,ez} letterpress portland chicharrones cornhole ethical. Coloring book dreamcatcher ethical single-origin coffee listicle, tacos venmo enamel pin retro bushwick. Polaroid deep vee umami, locavore subway tile adaptogen crucifix kickstarter pour-over waistcoat cliche selvage. 
+
+$\Delta G_[pol]$
 
 \begin{description}
 	\item[Stoichiometry]
