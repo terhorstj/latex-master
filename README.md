@@ -71,6 +71,9 @@ At this point, we have enough information to build a bare-bones document without
 
 * ```\usepackage{mathptmx}``` - This package redefines the main serif font as Times (*not* Times New Roman), including (most importantly) math support; it redefines the sans serif font as Helvetica; and it redefines the typewriter (monospace) font as Courier. Although Times is a widely used to font, there are many reasons why it should not be used, principally among which is designed specifically for printing in narrow columns where space is limited. In broader contexts (for example, essays, reports, letters etc.), other font choices are better. However, oftentimes is expected to be used as the main font, so I'm including it here for the sake of compatibility.
 
+	* Some improved math glyphs can be added by including ```newtxmath``` here. For text, ```newtxtext``` or ```times``` exist that provide subtle differences. Use as preferred.
+	
+
 * ```\usepackage{enumitem}``` - This package provides additional options for the ```enumerate``` and ```itemize``` environments. See the package documentation for more details.
 
 * ```\usepackage{subtext}``` - A useful package for setting Roman text in subscripts in math mode.
