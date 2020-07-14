@@ -5,8 +5,8 @@
 \def\myname{John Terhorst}
 \def\myshortname{Terhorst, J.}
 \def\mydoctitle{Document Title}
-\def\myfontsize{11pt}
-\def\mymargins{1.1in}
+\def\myfontsize{10pt}
+\def\mymargins{1.6in}
 
 % ==========================================================================================
 % ==========================================================================================
@@ -115,7 +115,8 @@
 % \usepackage{titlesec} 
  \usepackage[explicit]{titlesec} % use [explicit] to include arg #1 as in example for underline
  \titleformat{\section}[block]{\filcenter}{\thetitle.}{0.5em}{\textsc{#1}} % centered title - very nice as \section*
- \titleformat{\subsection}{\normalfont}{\thesubsection.}{.5em}{\textit{#1}} % requires ulem
+ \titleformat{\subsection}{\normalfont}{\thesubsection.}{.5em}{\textit{#1}} % 
+ \renewcommand{\abstractname}{\normalfont\textsc{Abstract}}
 % \titleformat{\section}{\bfseries}{\thetitle.}{.5em}{}
 % \titleformat{\section}[runin]{\large\bfseries}{\thetitle.}{.5em}{} - use [runin] to put text inline like \paragraph
 % \titleformat{\section}{\large\bfseries}{\thetitle.}{.5em}{}
@@ -336,36 +337,39 @@
 \newcommand{\crefrangeconjunction}{--}
 \end{comment}
 
+\begin{comment} % usage:
+See \crefrange{eqa}{eqb}. Also see \cref{eqb}. Plus, \cref{eqa,eqb}
+See \crefrange{tabgrav}{tabtwo}. Also see \cref{tabtwo}. Plus, \cref{tabgrav,tabtwo}
+See \crefrange{bornrad}{no}. Also see \cref{no}. Plus, \cref{bornrad,no}
+\end{comment}
+
 % ==========================================================================================
 % ==========================================================================================
 % ==========================================================================================
 
 % maketitle definitions
 
-\title{\vspace*{-1.51cm}\mydoctitle}
-%\author{\normalsize\myname}
-\date{\today}
+\title{\mydoctitle}
+%\author{\small\myname}
+\date{\small\today}
 
 \usepackage{authblk}
-\author[1,2]{\myname}
+\author[1,2]{\small\myname}
 \author[2]{Erin Schwartz}
 \author[2]{Heather Glasser}
-\affil[1]{Division of Natural Sciences, Vanguard University, Costa Mesa, CA 92626}
-\affil[2]{Department of Chemistry, University of Redlands, Redlands, CA, 92373}
+\affil[1]{\itshape Division of Natural Sciences, Vanguard University, Costa Mesa, CA 92626}
+\affil[2]{\itshape Department of Chemistry, University of Redlands, Redlands, CA, 92373}
 
 \begin{document}
-
-
-
 
 % ==========================================================================================
 % ==========================================================================================
 % ==========================================================================================
 
 % front matter
-%\pagestyle{empty}
+\pagestyle{empty}
 \maketitle
-\begin{comment}
+%\begin{comment}
 \tableofcontents
 \newpage
 \pagestyle{plain}
@@ -379,7 +383,15 @@
 \newpage
 \setcounter{page}{1}
 \pagenumbering{arabic}
-\end{comment}
+%\end{comment}
+
+% ==========================================================================================
+% ==========================================================================================
+% ==========================================================================================
+
+\begin{abstract} % can use \begin{adjustwidth}{2cm}{2cm} text \end{adjustwidth} for faking an abstract env
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Feugiat vivamus at augue eget arcu. Donec et odio pellentesque diam volutpat commodo sed egestas egestas. Sem nulla pharetra diam sit amet. Sagittis purus sit amet volutpat consequat mauris. Urna cursus eget nunc scelerisque viverra mauris in aliquam. Nec dui nunc mattis enim. Rhoncus aenean vel elit scelerisque mauris pellentesque pulvinar. Cras fermentum odio eu feugiat pretium nibh ipsum. Luctus accumsan tortor posuere ac ut consequat semper. Suscipit tellus mauris a diam maecenas sed enim ut. Posuere lorem ipsum dolor sit amet consectetur adipiscing. Duis tristique sollicitudin nibh sit amet commodo nulla. Bibendum est ultricies integer quis. Purus ut faucibus pulvinar elementum integer enim. Pretium lectus quam id leo in vitae turpis massa. Vulputate enim nulla aliquet porttitor lacus luctus accumsan. Sapien et ligula ullamcorper malesuada proin libero nunc consequat. Tortor id aliquet lectus proin nibh nisl condimentum id. Nibh tortor id aliquet lectus proin nibh nisl.
+\end{abstract}
 
 % ==========================================================================================
 % ==========================================================================================
@@ -387,7 +399,7 @@
 
 \section{Introduction}
 
-Health goth\supercite{avogadro} letterpress portland chicharrones cornhole ethical. Coloring book dreamcatcher ethical single-origin coffee listicle, tacos venmo enamel pin retro bushwick. Polaroid deep vee umami, locavore subway tile adaptogen crucifix kickstarter pour-over waistcoat cliche selvage. 
+Health goth\supercite{avogadro} letterpress portland\supercite{gm3} chicharrones cornhole ethical.\supercite{neutron} Coloring book dreamcatcher ethical single-origin coffee listicle, tacos venmo enamel pin retro bushwick. Polaroid deep vee umami, locavore subway tile adaptogen crucifix kickstarter pour-over waistcoat cliche selvage.\supercite{neutron,avogadro,gm3}
 
 $\Delta G_[pol]$
 
