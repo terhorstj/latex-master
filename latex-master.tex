@@ -15,7 +15,7 @@
 \documentclass[letterpaper,\myfontsize]{article}
 %\documentclass[letterpaper,titlepage,\myfontsize]{article}
 %\documentclass[letterpaper,twocolumn,\myfontsize]{article}
-\usepackage[top=\mymargins, bottom=\mymargins, left=\mymargins, right=\mymargins]{geometry} % showframe
+%\usepackage[top=\mymargins, bottom=\mymargins, left=\mymargins, right=\mymargins]{geometry} % showframe
 %\usepackage{typearea} % auto-calculate page layout
 
 % ==========================================================================================
@@ -28,16 +28,17 @@
 % \usepackage[T1]{fontenc} % use for documents with lots of accented chars like \"o or \AA or \'e
 % \usepackage[tracking=true,kerning=true,factor=1100,stretch=10,shrink=10]{microtype}
 \usepackage{microtype,verbatim}
+\usepackage{graphicx}
+
 %\usepackage{newtxtext,newtxmath} % use times with math support  
 %\usepackage{mathptmx,newtxmath} % use times with math support  
-% \usepackage[version=4]{mhchem}  % use arrows=pgf-filled if using mathptmx or newtxtext/newtxmath
+\usepackage[version=4]{mhchem}  % use arrows=pgf-filled if using mathptmx or newtxtext/newtxmath
 \usepackage{parskip}
 \usepackage{siunitx}
 \usepackage{textgreek} % upright greek in text mode; eg \textalpha
-\usepackage{mathtools} % replaces amsmath/symb
+% \usepackage{mathtools} % replaces amsmath/symb
 % \usepackage{ulem} % use underline for \emph{}; provides better \uline{}; use [normalem] to keep \emph{} as italic
 % textcomp,float % other utility packages
-% \usepackage{tikz} % remove if no tikz
 % \usepackage{enumitem} % can use [noitemsep] in itemize 
 % \usepackage[all]{nowidow} % widow/orphan prevention
 % \usepackage[bottom,hang]{footmisc}\setlength\footnotemargin{9pt}\interfootnotelinepenalty=10000\setlength{\skip\footins}{0.5cm}
@@ -93,7 +94,6 @@
 \usepackage{booktabs}
 \setlength\heavyrulewidth{0.15ex}\setlength\cmidrulewidth{0.1ex}\setlength\lightrulewidth{0.1ex}
 
-\usepackage{graphicx}
 %\usepackage[font=normalsize,labelfont={bf},margin=1in]{caption}\captionsetup[table]{aboveskip=3pt}\captionsetup[figure]{skip=3pt}
 \usepackage[font=normalsize,labelfont={sc}]{caption}\captionsetup[table]{aboveskip=3pt}\captionsetup[figure]{skip=3pt}
 % \setlength{\textfloatsep}{9pt plus 1.0pt minus 2.0pt} % adjust space from caption to body text
@@ -228,8 +228,18 @@
 		\noindent{\textbf{#1}}
     }{ \end{mdframed} }
 
-\usepackage{subtext} % very useful -- use as $\Delta G_[pol]$ vs $\Delta G_\textnormal{pol}$
-                     % must be loaded after infobox code
+% \usepackage{subtext} % very useful -- use as $\Delta G_[pol]$ vs $\Delta G_\textnormal{pol}$
+                       % must be loaded after infobox code, seems to conflict with tikz :(
+
+% shaded box for definition - use as \definition{term}{def}
+\newcommand{\definition}[2]{% or use another arg for color 
+         \begin{center}%
+            \begin{tikzpicture}%
+                \node[rectangle, fill=black, top color=black!10, bottom color=black!10,  inner xsep=5pt, inner ysep=5pt, outer ysep=5pt]{
+                \begin{minipage}{0.95\linewidth}\textbf{#1:} #2\end{minipage}};%
+            \end{tikzpicture}%
+         \end{center}%
+}
 
 % ==========================================================================================
 % ==========================================================================================
@@ -310,6 +320,12 @@
 % \ifweb  
 % \else
 % \fi
+
+% ==========================================================================================
+% ==========================================================================================
+% ==========================================================================================
+
+\usepackage{tikz} % remove if no tikz
 
 % ==========================================================================================
 % ==========================================================================================
@@ -401,7 +417,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 
 Health goth\supercite{avogadro} letterpress portland\supercite{gm3} chicharrones cornhole ethical.\supercite{neutron} Coloring book dreamcatcher ethical single-origin coffee listicle, tacos venmo enamel pin retro bushwick. Polaroid deep vee umami, locavore subway tile adaptogen crucifix kickstarter pour-over waistcoat cliche selvage.\supercite{neutron,avogadro,gm3}
 
-$\Delta G_[pol]$
+%$\Delta G_[pol]$
 
 \begin{description}
 	\item[Stoichiometry]
@@ -409,6 +425,8 @@ $\Delta G_[pol]$
 	\item[Atomic mass]
 			The mass of an atom of a chemical element expressed in atomic mass units. It is approximately equivalent to the number of protons and neutrons in the atom (the mass number) or to the average number allowing for the relative abundances of different isotopes. 
 \end{description} 
+
+\definition{Law of Definite Proportions}{A given compound always contains exactly the same proportion of elements by mass.}
 
 \smallskip
 \begin{figure}[htbp]
@@ -442,6 +460,14 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 		\end{tabular}
 	\label{tabgrav}
 \end{table}
+ 
+% tikz figure - https://www.mathcha.io/editor#
+\begin{figure}[htbp]
+	\centering
+		\input{nucleus} 
+		\caption{The nucleus.}
+		\label{fig:bornrad}
+\end{figure}
 
 Tellus in hac habitasse platea. Lectus quam id leo in vitae turpis massa sed. A condimentum vitae sapien pellentesque habitant morbi tristique. Velit sed ullamcorper morbi tincidunt. Volutpat est velit egestas dui id ornare arcu. Ipsum dolor sit amet consectetur adipiscing elit duis tristique. Tellus orci ac auctor augue mauris augue neque. 
 
