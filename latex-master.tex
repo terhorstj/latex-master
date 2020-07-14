@@ -34,20 +34,22 @@
 \usepackage{parskip}
 \usepackage{siunitx}
 \usepackage{textgreek} % upright greek in text mode; eg \textalpha
+\usepackage{mathtools} % replaces amsmath/symb
 % \usepackage{ulem} % use underline for \emph{}; provides better \uline{}; use [normalem] to keep \emph{} as italic
 % textcomp,float % other utility packages
 % \usepackage{tikz} % remove if no tikz
 % \usepackage{enumitem} % can use [noitemsep] in itemize 
-% \usepackage[bottom,hang,symbol]{footmisc}\setlength\footnotemargin{9pt}\interfootnotelinepenalty=10000\setlength{\skip\footins}{0.5cm}  % if used, must go after setspace
-% \usepackage{setspace}\setstretch{1.1} % if used, must go before geometry
 % \usepackage[all]{nowidow} % widow/orphan prevention
+% \usepackage[bottom,hang]{footmisc}\setlength\footnotemargin{9pt}\interfootnotelinepenalty=10000\setlength{\skip\footins}{0.5cm}
 
 % ==========================================================================================
 % ==========================================================================================
 % ==========================================================================================
 
-% natbib references
+% references
 
+\begin{comment}
+% natbib - manual formatting
 \usepackage[super,comma,sort&compress]{natbib}
 \renewcommand{\bibnumfmt}[1]{#1.}
 % \renewcommand{\refname}{References}
@@ -55,6 +57,32 @@
 \newcommand*\myaref[6]{\bibitem{#1}#2 \textit{#3} \textbf{#4}, \textit{#5}, #6.} 
 \newcommand*\mytref[7]{\bibitem{#1}#2 ``#3.'' \textit{#4} \textbf{#5}, \textit{#6}, #7.} % with title
 \newcommand*\myzref[8]{\bibitem{#1}#2 ``#3.'' \textit{#4} \textbf{#5}, \textit{#6}(#7), #8.} % with title and issue
+\end{comment}
+
+%\begin{comment} % biber/biblatex
+\usepackage[autocite = superscript, sortcites = true, backend = biber, style = custom]{biblatex}
+\bibliography{bibrefs}
+\defbibenvironment{bibliography}
+  {\enumerate
+     {}
+     {\setlength{\leftmargin}{\bibhang}%
+      \setlength{\itemindent}{-\leftmargin}%
+      \setlength{\itemsep}{\bibitemsep}%
+      \setlength{\parsep}{\bibparsep}}}
+  {\endenumerate}
+  {\item}
+\setcounter{secnumdepth}{4}%\setcounter{tocdepth}{4}
+\renewcommand{\thefootnote}{\textit{\roman{footnote}}}
+\usepackage[bottom]{footmisc}\interfootnotelinepenalty=10000\setlength{\skip\footins}{0.5cm} 
+%\end{comment}
+
+% use with
+\begin{comment}
+\begin{refsection}
+\printbibliography[heading=subbibliography]
+\end{refsection}
+\end{comment}
+% or just \printbibliography
 
 % ==========================================================================================
 % ==========================================================================================
@@ -67,7 +95,7 @@
 
 \usepackage{graphicx}
 %\usepackage[font=normalsize,labelfont={bf},margin=1in]{caption}\captionsetup[table]{aboveskip=3pt}\captionsetup[figure]{skip=3pt}
-\usepackage[font=normalsize,labelfont={bf}]{caption}\captionsetup[table]{aboveskip=3pt}\captionsetup[figure]{skip=3pt}
+\usepackage[font=normalsize,labelfont={sc}]{caption}\captionsetup[table]{aboveskip=3pt}\captionsetup[figure]{skip=3pt}
 % \setlength{\textfloatsep}{9pt plus 1.0pt minus 2.0pt} % adjust space from caption to body text
 
 % ==========================================================================================
@@ -84,13 +112,14 @@
 		{} % - goes before section title but after the section number, can include formatting not applied to the number
 \end{comment}
 
-\usepackage{titlesec} 
-% \usepackage[explicit]{titlesec} % use [explicit] to include arg #1 as in example for underline
-% \titleformat{\section}[block]{\filcenter}{\thetitle.}{0.5em}{\textsc{#1}} % centered title - very nice as \section*
+% \usepackage{titlesec} 
+ \usepackage[explicit]{titlesec} % use [explicit] to include arg #1 as in example for underline
+ \titleformat{\section}[block]{\filcenter}{\thetitle.}{0.5em}{\textsc{#1}} % centered title - very nice as \section*
+ \titleformat{\subsection}{\normalfont}{\thesubsection.}{.5em}{\textit{#1}} % requires ulem
 % \titleformat{\section}{\bfseries}{\thetitle.}{.5em}{}
 % \titleformat{\section}[runin]{\large\bfseries}{\thetitle.}{.5em}{} - use [runin] to put text inline like \paragraph
-\titleformat{\section}{\large\bfseries}{\thetitle.}{.5em}{}
-\titleformat{\subsection}{\large\bfseries}{\thetitle.}{.5em}{}
+% \titleformat{\section}{\large\bfseries}{\thetitle.}{.5em}{}
+% \titleformat{\subsection}{\large\bfseries}{\thetitle.}{.5em}{}
 % \titleformat{\subsection}{\normalsize\itshape}{\thetitle.}{.5em}{}
 % \titleformat{\subsection}{\normalfont}{\thesubsection.}{.5em}{\uline{#1}} % requires ulem
 % \titleformat{\subsection}{\itshape}{\thesubsection.}{.5em}{\uline{#1}}
@@ -205,7 +234,7 @@
 % ==========================================================================================
 % ==========================================================================================
 
-% labels
+% labels - deprecated with use of cleveref (see below)
 
 % \def\tablab{Table}\def\tabslab{\tablab s}
 % \def\figlab{Figure}\def\figslab{\figlab s}
@@ -273,6 +302,8 @@
 % \def\threequarter{\nicefrac{3}{4}}
 % \def\twothird{\nicefrac{2}{3}}
 
+% boolean 
+
 % \newif\ifweb
 % \webfalse % \webtrue
 % \ifweb  
@@ -296,6 +327,14 @@
 %              pdftitle = {\mydoctitle},
 %              pdfsubject = {\mydoctitle},
 %              pdfpagemode = UseThumbs }
+
+% cleveref - load very last
+\begin{comment}
+\usepackage[capitalise,noabbrev]{cleveref}
+\crefname{equation}{Eq.}{Eqs.}
+\creflabelformat{equation}{#2#1#3}
+\newcommand{\crefrangeconjunction}{--}
+\end{comment}
 
 % ==========================================================================================
 % ==========================================================================================
@@ -348,7 +387,7 @@
 
 \section{Introduction}
 
-Health goth~\cite{heitlon,ez} letterpress portland chicharrones cornhole ethical. Coloring book dreamcatcher ethical single-origin coffee listicle, tacos venmo enamel pin retro bushwick. Polaroid deep vee umami, locavore subway tile adaptogen crucifix kickstarter pour-over waistcoat cliche selvage. 
+Health goth\supercite{avogadro} letterpress portland chicharrones cornhole ethical. Coloring book dreamcatcher ethical single-origin coffee listicle, tacos venmo enamel pin retro bushwick. Polaroid deep vee umami, locavore subway tile adaptogen crucifix kickstarter pour-over waistcoat cliche selvage. 
 
 $\Delta G_[pol]$
 
@@ -426,6 +465,7 @@ Amet mauris commodo quis imperdiet. Facilisi nullam vehicula ipsum a arcu cursus
 % ==========================================================================================
 % ==========================================================================================
 
+\begin{comment} % natbib/manual
 \newpage
 \addcontentsline{toc}{section}{References}
 \bibliographystyle{plain}
@@ -433,6 +473,10 @@ Amet mauris commodo quis imperdiet. Facilisi nullam vehicula ipsum a arcu cursus
 \mytref{heitlon}{Heitler, W.; London, F.}{Wechselwirkung neutraler Atome und hom\"oopolare Bindung nach der Quantenmechanik}{Phys.\ Lett.}{1927}{44}{455--473}
 \myzref{ez}{Terhorst, J.\ P.; Jorgensen, W.\ L.}{\textsl{E/Z} Energetics for Molecular Modeling and Design}{J.\ Chem.\ Theory Comput.}{2010}{6}{9}{2762--2769}
 \end{thebibliography}
+\end{comment}
+
+% biber/biblatex
+\printbibliography
 
 % ==========================================================================================
 % ==========================================================================================
