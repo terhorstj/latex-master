@@ -17,6 +17,7 @@
 %\documentclass[letterpaper,twocolumn,\myfontsize]{article}
 %\usepackage[top=\mymargins, bottom=\mymargins, left=\mymargins, right=\mymargins]{geometry} % showframe
 %\usepackage{typearea} % auto-calculate page layout
+% \renewcommand{\familydefault}{\sfdefault} % sans default 
 
 % ==========================================================================================
 % ==========================================================================================
@@ -29,13 +30,12 @@
 % \usepackage[tracking=true,kerning=true,factor=1100,stretch=10,shrink=10]{microtype}
 \usepackage{microtype,verbatim}
 \usepackage{graphicx}
-
 %\usepackage{newtxtext,newtxmath} % use times with math support  
 %\usepackage{mathptmx,newtxmath} % use times with math support  
 \usepackage[version=4]{mhchem}  % use arrows=pgf-filled if using mathptmx or newtxtext/newtxmath
-\usepackage{parskip}
+%\usepackage{parskip}
 \usepackage{siunitx}
-\usepackage{textgreek} % upright greek in text mode; eg \textalpha
+% \usepackage{textgreek} % upright greek in text mode; eg \textalpha
 % \usepackage{mathtools} % replaces amsmath/symb
 % \usepackage{ulem} % use underline for \emph{}; provides better \uline{}; use [normalem] to keep \emph{} as italic
 % textcomp,float % other utility packages
@@ -47,22 +47,78 @@
 % ==========================================================================================
 % ==========================================================================================
 
+% ars classica theme
+
+\begin{comment}
+\usepackage[osf,sc]{mathpazo}
+\usepackage{microtype,eulervm,textcase,soul,siunitx}
+\usepackage[euler]{textgreek}
+\usepackage[version=4]{mhchem}
+\usepackage[bottom,hang]{footmisc}\setlength\footnotemargin{9pt}\interfootnotelinepenalty=10000\setlength{\skip\footins}{0.5cm}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhead[L]{\textit{Terhorst, J.}}
+\fancyhead[R]{\thepage}
+\fancyfoot[C]{}
+\renewcommand{\headrulewidth}{0.0pt}
+\setlength{\headheight}{13.6pt}
+
+\renewcommand{\sfdefault}{iwona}
+\DeclareRobustCommand{\spacedallcaps}[1]{\textls[160]{\MakeTextUppercase{\sffamily #1}}}
+\DeclareRobustCommand{\spacedlowsmallcaps}[1]{\textls[80]{\MakeTextLowercase{\scshape\sffamily #1}}}
+
+\usepackage{tocloft}
+\renewcommand{\contentsname}{\spacedallcaps{\mdseries\Large Contents}}
+\renewcommand{\listfigurename}{\spacedallcaps{\mdseries\Large List of Figures}}
+\renewcommand{\listtablename}{\spacedallcaps{\mdseries\Large List of Tables}}
+\renewcommand{\cftsecfont}{{\MakeUppercase\mdseries\sffamily}}
+\renewcommand{\cftsecpagefont}{\mdseries}
+\renewcommand{\cftbeforesecskip}{0pt}
+\setcounter{secnumdepth}{4}
+
+% or for toc
+\usepackage{tocbasic}
+\addtotoclist[report.cls]{toc}
+\renewcommand*{\tableofcontents}{\listoftoc[{\contentsname}]{toc}}% ToC under control of tocbasic
+\AfterTOCHead[toc]{\thispagestyle{empty}\pagestyle{empty}}
+\AfterStartingTOC[toc]{\clearpage}
+
+\usepackage[explicit]{titlesec}
+\titleformat{\chapter}{\sffamily\Large}{\spacedallcaps{Chapter \thechapter}}{0em}{\vskip+20pt\Large\spacedallcaps{#1}} % 
+\titleformat{\section}{\sffamily\bfseries}{\thesection}{1.5em}{\spacedallcaps{#1}} % 
+\titleformat{\subsection}{\sffamily\bfseries}{\thesubsection}{1.5em}{\spacedallcaps{#1}} % 
+\titleformat{\subsubsection}{\sffamily\bfseries}{\thesubsubsection}{1.5em}{\spacedallcaps{#1}} % 
+
+\title{\vspace*{-0.5in}\spacedallcaps{\huge Article Title}}
+\author{\spacedlowsmallcaps{John Terhorst*,$^\dagger$}}
+\date{}
+\end{comment}
+
+% ==========================================================================================
+% ==========================================================================================
+% ==========================================================================================
+
 % references
 
 \begin{comment}
-% natbib - manual formatting
+% natbib 
 \usepackage[super,comma,sort&compress]{natbib}
 \renewcommand{\bibnumfmt}[1]{#1.}
 % \renewcommand{\refname}{References}
-% \let\oldbibliography\thebibliography\renewcommand{\thebibliography}[1]{\oldbibliography{#1}\setlength{\itemsep}{3pt}}
+% \renewcommand{\bibname}{References}
+% use with:
+% \addcontentsline{toc}{chapter}{References}
+% \bibliographystyle{jpt-all} % see other bst files in bibtex folder
+% \bibliography{refsdiss} % bibfile
+% or for manual referencing:   key      journal      year        vol       page
 \newcommand*\myaref[6]{\bibitem{#1}#2 \textit{#3} \textbf{#4}, \textit{#5}, #6.} 
 \newcommand*\mytref[7]{\bibitem{#1}#2 ``#3.'' \textit{#4} \textbf{#5}, \textit{#6}, #7.} % with title
 \newcommand*\myzref[8]{\bibitem{#1}#2 ``#3.'' \textit{#4} \textbf{#5}, \textit{#6}(#7), #8.} % with title and issue
 \end{comment}
 
-%\begin{comment} % biber/biblatex
+%\begin{comment} % biber/biblatex - using custom.bbx/cbx files from acs
 \usepackage[autocite = superscript, sortcites = true, backend = biber, style = custom]{biblatex}
-\bibliography{bibrefs}
+\bibliography{bibrefs} % bib file
 \defbibenvironment{bibliography}
   {\enumerate
      {}
@@ -72,7 +128,8 @@
       \setlength{\parsep}{\bibparsep}}}
   {\endenumerate}
   {\item}
-\setcounter{secnumdepth}{4}%\setcounter{tocdepth}{4}
+
+% roman footnotes so we don't conflict with bib references
 \renewcommand{\thefootnote}{\textit{\roman{footnote}}}
 \usepackage[bottom]{footmisc}\interfootnotelinepenalty=10000\setlength{\skip\footins}{0.5cm} 
 %\end{comment}
@@ -84,6 +141,9 @@
 \end{refsection}
 \end{comment}
 % or just \printbibliography
+
+% sections and toc depth
+\setcounter{secnumdepth}{4}%\setcounter{tocdepth}{4}
 
 % ==========================================================================================
 % ==========================================================================================
@@ -333,8 +393,8 @@
 
 % hyperref, load last
 
-% \PassOptionsToPackage{hyphens}{xurl} % hyperref uses url package; this enables extra hyphenation for long urls
-% \usepackage[pdftex]{hyperref}
+\PassOptionsToPackage{hyphens}{xurl} % hyperref uses url package; this enables extra hyphenation for long urls
+\usepackage[pdftex]{hyperref}
 % \urlstyle{same} % use roman instead of typewriter for url
 % \hypersetup{ colorlinks = true,
 %              linkcolor = true, 
@@ -346,12 +406,10 @@
 %              pdfpagemode = UseThumbs }
 
 % cleveref - load very last
-\begin{comment}
-\usepackage[capitalise,noabbrev]{cleveref}
+\usepackage[capitalize,noabbrev,nameinlink]{cleveref}
 \crefname{equation}{Eq.}{Eqs.}
 \creflabelformat{equation}{#2#1#3}
 \newcommand{\crefrangeconjunction}{--}
-\end{comment}
 
 \begin{comment} % usage:
 See \crefrange{eqa}{eqb}. Also see \cref{eqb}. Plus, \cref{eqa,eqb}
@@ -370,7 +428,7 @@ See \crefrange{bornrad}{no}. Also see \cref{no}. Plus, \cref{bornrad,no}
 \date{\small\today}
 
 \usepackage{authblk}
-\author[1,2]{\small\myname}
+\author[1,2]{\small John Terhorst}
 \author[2]{Erin Schwartz}
 \author[2]{Heather Glasser}
 \affil[1]{\itshape Division of Natural Sciences, Vanguard University, Costa Mesa, CA 92626}
@@ -383,9 +441,9 @@ See \crefrange{bornrad}{no}. Also see \cref{no}. Plus, \cref{bornrad,no}
 % ==========================================================================================
 
 % front matter
-\pagestyle{empty}
+%\pagestyle{empty}
 \maketitle
-%\begin{comment}
+\begin{comment}
 \tableofcontents
 \newpage
 \pagestyle{plain}
@@ -399,11 +457,13 @@ See \crefrange{bornrad}{no}. Also see \cref{no}. Plus, \cref{bornrad,no}
 \newpage
 \setcounter{page}{1}
 \pagenumbering{arabic}
-%\end{comment}
+\end{comment}
 
 % ==========================================================================================
 % ==========================================================================================
 % ==========================================================================================
+
+\maketitle
 
 \begin{abstract} % can use \begin{adjustwidth}{2cm}{2cm} text \end{adjustwidth} for faking an abstract env
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Feugiat vivamus at augue eget arcu. Donec et odio pellentesque diam volutpat commodo sed egestas egestas. Sem nulla pharetra diam sit amet. Sagittis purus sit amet volutpat consequat mauris. Urna cursus eget nunc scelerisque viverra mauris in aliquam. Nec dui nunc mattis enim. Rhoncus aenean vel elit scelerisque mauris pellentesque pulvinar. Cras fermentum odio eu feugiat pretium nibh ipsum. Luctus accumsan tortor posuere ac ut consequat semper. Suscipit tellus mauris a diam maecenas sed enim ut. Posuere lorem ipsum dolor sit amet consectetur adipiscing. Duis tristique sollicitudin nibh sit amet commodo nulla. Bibendum est ultricies integer quis. Purus ut faucibus pulvinar elementum integer enim. Pretium lectus quam id leo in vitae turpis massa. Vulputate enim nulla aliquet porttitor lacus luctus accumsan. Sapien et ligula ullamcorper malesuada proin libero nunc consequat. Tortor id aliquet lectus proin nibh nisl condimentum id. Nibh tortor id aliquet lectus proin nibh nisl.
@@ -413,7 +473,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 % ==========================================================================================
 % ==========================================================================================
 
-\section{Introduction}
+\section*{Introduction}
 
 Health goth\supercite{avogadro} letterpress portland\supercite{gm3} chicharrones cornhole ethical.\supercite{neutron} Coloring book dreamcatcher ethical single-origin coffee listicle, tacos venmo enamel pin retro bushwick. Polaroid deep vee umami, locavore subway tile adaptogen crucifix kickstarter pour-over waistcoat cliche selvage.\supercite{neutron,avogadro,gm3}
 
@@ -433,8 +493,10 @@ Health goth\supercite{avogadro} letterpress portland\supercite{gm3} chicharrones
 \centering
 \includegraphics[scale=0.25]{square.jpg}
 \caption{The pairwise nature of the Born radius.}
-\label{bornrad}
+\label{sq}
 \end{figure}%
+
+See \cref{sq}.
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Feugiat vivamus at augue eget arcu. Donec et odio pellentesque diam volutpat commodo sed egestas egestas. Sem nulla pharetra diam sit amet. Sagittis purus sit amet volutpat consequat mauris. 
 
