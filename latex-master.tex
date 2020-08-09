@@ -18,6 +18,7 @@
 %\usepackage[top=\mymargins, bottom=\mymargins, left=\mymargins, right=\mymargins]{geometry} % showframe
 %\usepackage{typearea} % auto-calculate page layout
 % \renewcommand{\familydefault}{\sfdefault} % sans default 
+\DeclareFontSeriesDefault[rm]{bf}{b} % when in roman family, define bfseries as b {not bx}
 
 % ==========================================================================================
 % ==========================================================================================
@@ -30,16 +31,21 @@
 % \usepackage[tracking=true,kerning=true,factor=1100,stretch=10,shrink=10]{microtype}
 \usepackage{microtype,verbatim}
 \usepackage{graphicx}
+%\usepackage{txfonts} % use times with math support
+%\usepackage{mathptmx} % use times with math support  
 %\usepackage{newtxtext,newtxmath} % use times with math support  
 %\usepackage{mathptmx,newtxmath} % use times with math support  
+%\usepackage{anyfontsize}
+%\usepackage{authoraftertitle} % access \MyTitle etc
 \usepackage[version=4]{mhchem}  % use arrows=pgf-filled if using mathptmx or newtxtext/newtxmath
 %\usepackage{parskip}
 \usepackage{siunitx}
-% \usepackage{textgreek} % upright greek in text mode; eg \textalpha
+% \usepackage{textgreek} % upright greek in text mode; eg \textalpha. use [artemisia] for tmx or [euler] for pazo
 % \usepackage{mathtools} % replaces amsmath/symb
 % \usepackage{ulem} % use underline for \emph{}; provides better \uline{}; use [normalem] to keep \emph{} as italic
 % textcomp,float % other utility packages
-% \usepackage{enumitem} % can use [noitemsep] in itemize 
+% \usepackage[shortlabels]{enumitem} % can use [noitemsep] in itemize
+% \usepackage{paralist} inparaenum 
 % \usepackage[all]{nowidow} % widow/orphan prevention
 % \usepackage[bottom,hang]{footmisc}\setlength\footnotemargin{9pt}\interfootnotelinepenalty=10000\setlength{\skip\footins}{0.5cm}
 
@@ -50,9 +56,11 @@
 % ars classica theme
 
 \begin{comment}
-\usepackage[osf,sc]{mathpazo}
-\usepackage{microtype,eulervm,textcase,soul,siunitx}
+%\usepackage[osf,sc]{mathpazo}
+\usepackage{newpxtext}
+\usepackage[euler-digits]{eulervm}
 \usepackage[euler]{textgreek}
+\usepackage{microtype,textcase,soul,siunitx}
 \usepackage[version=4]{mhchem}
 \usepackage[bottom,hang]{footmisc}\setlength\footnotemargin{9pt}\interfootnotelinepenalty=10000\setlength{\skip\footins}{0.5cm}
 \usepackage{fancyhdr}
@@ -108,7 +116,7 @@
 % \renewcommand{\bibname}{References}
 % use with:
 % \addcontentsline{toc}{chapter}{References}
-% \bibliographystyle{jpt-all} % see other bst files in bibtex folder
+% \bibliographystyle{jpt-all} % see other bst files in bibtex folder % or don't declare if using achemso
 % \bibliography{refsdiss} % bibfile
 % or for manual referencing:   key      journal      year        vol       page
 \newcommand*\myaref[6]{\bibitem{#1}#2 \textit{#3} \textbf{#4}, \textit{#5}, #6.} 
@@ -158,6 +166,34 @@
 \usepackage[font=normalsize,labelfont={sc}]{caption}\captionsetup[table]{aboveskip=3pt}\captionsetup[figure]{skip=3pt}
 % \setlength{\textfloatsep}{9pt plus 1.0pt minus 2.0pt} % adjust space from caption to body text
 
+% standard figure env - floating. can use \usepackage{float} with [H] to not float
+\begin{comment}
+\begin{figure}[htbp]
+	\centering
+		\includegraphics[width=\textwidth]{bornrad.pdf} % scale % or do \input{} for tex/tikz
+		\caption{The pairwise nature of the Born radius.}
+		\label{fig:bornrad}
+\end{figure}
+\end{comment}
+
+% to do a figure without the env, use this with \usepackage{caption} 
+
+\begin{comment}
+\begin{center}
+\resizebox{\textwidth}{!}{\input{nucleus}} % to scale \input{} figure based on geometry
+\captionof{figure}{Ions.}
+\label{fig:ion}
+\end{center}
+
+\begin{center}
+\scalebox{.75}{\input{nucleus}} % or to scale it based on figure dimensiona
+\captionof{figure}{Ions.}
+\label{fig:ions}
+\end{center}
+
+%can also use \includegraphics[width=\textwidth]{bornrad.pdf} % with [scale=0.75]
+\end{comment}
+
 % ==========================================================================================
 % ==========================================================================================
 % ==========================================================================================
@@ -191,6 +227,7 @@
 % \titlespacing\section{0pt}{13pt plus 0pt minus 0pt}{11pt plus 0pt minus 0pt}
 % \titlespacing\subsection{0pt}{13pt plus 0pt minus 0pt}{11pt plus 0pt minus 0pt}
 % \titlespacing\paragraph{0pt}{13pt plus 0pt minus 0pt}{5pt plus 2pt minus 2pt}
+% \setcounter{secnumdepth}{0} % use this instead of \section* if you don't want numbered headings
 
 % ==========================================================================================
 % ==========================================================================================
