@@ -18,7 +18,7 @@
 %\usepackage[top=\mymargins, bottom=\mymargins, left=\mymargins, right=\mymargins]{geometry} % showframe
 %\usepackage{typearea} % auto-calculate page layout
 % \renewcommand{\familydefault}{\sfdefault} % sans default 
-\DeclareFontSeriesDefault[rm]{bf}{b} % when in roman family, define bfseries as b {not bx}
+% \DeclareFontSeriesDefault[rm]{bf}{b} % when in roman family, define bfseries as b {not bx}
 
 % ==========================================================================================
 % ==========================================================================================
@@ -40,7 +40,7 @@
 \usepackage[version=4]{mhchem}  % use arrows=pgf-filled if using mathptmx or newtxtext/newtxmath
 %\usepackage{parskip}
 \usepackage{siunitx}
-% \usepackage{textgreek} % upright greek in text mode; eg \textalpha. use [artemisia] for tmx or [euler] for pazo
+%\usepackage{textgreek} % upright greek in text mode; eg \textalpha. use [artemisia] for tmx or [euler] for pazo
 % \usepackage{mathtools} % replaces amsmath/symb
 % \usepackage{ulem} % use underline for \emph{}; provides better \uline{}; use [normalem] to keep \emph{} as italic
 % textcomp,float % other utility packages
@@ -52,6 +52,13 @@
 % ==========================================================================================
 % ==========================================================================================
 % ==========================================================================================
+
+% libertine
+
+\usepackage[T1]{fontenc}
+\usepackage{libertine,eulerpx,anyfontsize}
+\usepackage[euler]{textgreek}
+\usepackage[cmr]{emf}
 
 % ars classica theme
 
@@ -124,7 +131,8 @@
 \newcommand*\myzref[8]{\bibitem{#1}#2 ``#3.'' \textit{#4} \textbf{#5}, \textit{#6}(#7), #8.} % with title and issue
 \end{comment}
 
-%\begin{comment} % biber/biblatex - using custom.bbx/cbx files from acs
+ % biber/biblatex - using custom.bbx/cbx files from acs
+
 \usepackage[autocite = superscript, sortcites = true, backend = biber, style = custom]{biblatex}
 \bibliography{bibrefs} % bib file
 \defbibenvironment{bibliography}
@@ -442,17 +450,6 @@
 %              pdfsubject = {\mydoctitle},
 %              pdfpagemode = UseThumbs }
 
-% cleveref - load very last
-\usepackage[capitalize,noabbrev,nameinlink]{cleveref}
-\crefname{equation}{Eq.}{Eqs.}
-\creflabelformat{equation}{#2#1#3}
-\newcommand{\crefrangeconjunction}{--}
-
-\begin{comment} % usage:
-See \crefrange{eqa}{eqb}. Also see \cref{eqb}. Plus, \cref{eqa,eqb}
-See \crefrange{tabgrav}{tabtwo}. Also see \cref{tabtwo}. Plus, \cref{tabgrav,tabtwo}
-See \crefrange{bornrad}{no}. Also see \cref{no}. Plus, \cref{bornrad,no}
-\end{comment}
 
 % ==========================================================================================
 % ==========================================================================================
@@ -470,6 +467,13 @@ See \crefrange{bornrad}{no}. Also see \cref{no}. Plus, \cref{bornrad,no}
 \author[2]{Heather Glasser}
 \affil[1]{\itshape Division of Natural Sciences, Vanguard University, Costa Mesa, CA 92626}
 \affil[2]{\itshape Department of Chemistry, University of Redlands, Redlands, CA, 92373}
+
+\usepackage[capitalize,noabbrev,nameinlink]{cleveref}
+\crefname{equation}{Eq.}{Eqs.}
+\crefname{page}{page}{pages}
+\creflabelformat{equation}{#2#1#3}
+\newcommand{\crefrangeconjunction}{--}
+
 
 \begin{document}
 
