@@ -1,6 +1,7 @@
 % ==========================================================================================
 % ==========================================================================================
 % ==========================================================================================
+\RequirePackage[l2tabu, orthodox]{nag}
 
 \def\myname{John Terhorst}
 \def\myshortname{Terhorst, J.}
@@ -19,6 +20,7 @@
 %\usepackage{typearea} % auto-calculate page layout
 % \renewcommand{\familydefault}{\sfdefault} % sans default 
 % \DeclareFontSeriesDefault[rm]{bf}{b} % when in roman family, define bfseries as b {not bx}
+% \frenchspacing %disables extra spacing after periods
 
 % ==========================================================================================
 % ==========================================================================================
@@ -29,18 +31,20 @@
 % \renewcommand{\familydefault}{\sfdefault}   % \rmdefault, \sfdefault, \ttdefault
 % \usepackage[T1]{fontenc} % use for documents with lots of accented chars like \"o or \AA or \'e
 % \usepackage[tracking=true,kerning=true,factor=1100,stretch=10,shrink=10]{microtype}
-\usepackage{microtype,verbatim}
+\usepackage{microtype,verbatim} % mlmodern
+\usepackage{mlmodern}
 \usepackage{graphicx}
 %\usepackage{txfonts} % use times with math support
 %\usepackage{mathptmx} % use times with math support  
-%\usepackage{newtxtext,newtxmath} % use times with math support  
-%\usepackage{mathptmx,newtxmath} % use times with math support  
+%\usepackage{newtxtext,newtxmath} % use times with math support 
+% \usepackage[smallerops,subscriptcorrection]{newtxmath} 
+% \usepackage[minionint,lf]{MinionPro} % use minionpro with math support
 %\usepackage{anyfontsize}
 %\usepackage{authoraftertitle} % access \MyTitle etc
 \usepackage[version=4]{mhchem}  % use arrows=pgf-filled if using mathptmx or newtxtext/newtxmath
 %\usepackage{parskip}
 \usepackage{siunitx}
-%\usepackage{textgreek} % upright greek in text mode; eg \textalpha. use [artemisia] for tmx or [euler] for pazo
+\usepackage{textgreek} % upright greek in text mode; eg \textalpha. use [artemisia] for tmx or [euler] for pazo
 % \usepackage{mathtools} % replaces amsmath/symb
 % \usepackage{ulem} % use underline for \emph{}; provides better \uline{}; use [normalem] to keep \emph{} as italic
 % textcomp,float % other utility packages
@@ -48,67 +52,8 @@
 % \usepackage{paralist} inparaenum 
 % \usepackage[all]{nowidow} % widow/orphan prevention
 % \usepackage[bottom,hang]{footmisc}\setlength\footnotemargin{9pt}\interfootnotelinepenalty=10000\setlength{\skip\footins}{0.5cm}
-
-% ==========================================================================================
-% ==========================================================================================
-% ==========================================================================================
-
-% libertine
-
-\usepackage[T1]{fontenc}
-\usepackage{libertine,eulerpx,anyfontsize}
-\usepackage[euler]{textgreek}
-\usepackage[cmr]{emf}
-
-% ars classica theme
-
-\begin{comment}
-%\usepackage[osf,sc]{mathpazo}
-\usepackage{newpxtext}
-\usepackage[euler-digits]{eulervm}
-\usepackage[euler]{textgreek}
-\usepackage{microtype,textcase,soul,siunitx}
-\usepackage[version=4]{mhchem}
-\usepackage[bottom,hang]{footmisc}\setlength\footnotemargin{9pt}\interfootnotelinepenalty=10000\setlength{\skip\footins}{0.5cm}
-\usepackage{fancyhdr}
-\pagestyle{fancy}
-\fancyhead[L]{\textit{Terhorst, J.}}
-\fancyhead[R]{\thepage}
-\fancyfoot[C]{}
-\renewcommand{\headrulewidth}{0.0pt}
-\setlength{\headheight}{13.6pt}
-
-\renewcommand{\sfdefault}{iwona}
-\DeclareRobustCommand{\spacedallcaps}[1]{\textls[160]{\MakeTextUppercase{\sffamily #1}}}
-\DeclareRobustCommand{\spacedlowsmallcaps}[1]{\textls[80]{\MakeTextLowercase{\scshape\sffamily #1}}}
-
-\usepackage{tocloft}
-\renewcommand{\contentsname}{\spacedallcaps{\mdseries\Large Contents}}
-\renewcommand{\listfigurename}{\spacedallcaps{\mdseries\Large List of Figures}}
-\renewcommand{\listtablename}{\spacedallcaps{\mdseries\Large List of Tables}}
-\renewcommand{\cftsecfont}{{\MakeUppercase\mdseries\sffamily}}
-\renewcommand{\cftsecpagefont}{\mdseries}
-\renewcommand{\cftbeforesecskip}{0pt}
-\setcounter{secnumdepth}{4}
-
-% or for toc
-\usepackage{tocbasic}
-\addtotoclist[report.cls]{toc}
-\renewcommand*{\tableofcontents}{\listoftoc[{\contentsname}]{toc}}% ToC under control of tocbasic
-\AfterTOCHead[toc]{\thispagestyle{empty}\pagestyle{empty}}
-\AfterStartingTOC[toc]{\clearpage}
-
-\usepackage[explicit]{titlesec}
-\titleformat{\chapter}{\sffamily\Large}{\spacedallcaps{Chapter \thechapter}}{0em}{\vskip+20pt\Large\spacedallcaps{#1}} % 
-\titleformat{\section}{\sffamily\bfseries}{\thesection}{1.5em}{\spacedallcaps{#1}} % 
-\titleformat{\subsection}{\sffamily\bfseries}{\thesubsection}{1.5em}{\spacedallcaps{#1}} % 
-\titleformat{\subsubsection}{\sffamily\bfseries}{\thesubsubsection}{1.5em}{\spacedallcaps{#1}} % 
-
-\title{\vspace*{-0.5in}\spacedallcaps{\huge Article Title}}
-\author{\spacedlowsmallcaps{John Terhorst*,$^\dagger$}}
-\date{}
-\end{comment}
-
+% \usepackage{setspace} % provides \doublespacing, \onehalfspacing, and \setstetch{}
+% or just use eg \linespread{1.1}
 % ==========================================================================================
 % ==========================================================================================
 % ==========================================================================================
@@ -133,17 +78,21 @@
 
  % biber/biblatex - using custom.bbx/cbx files from acs
 
-\usepackage[autocite = superscript, sortcites = true, backend = biber, style = custom]{biblatex}
-\bibliography{bibrefs} % bib file
-\defbibenvironment{bibliography}
-  {\enumerate
-     {}
-     {\setlength{\leftmargin}{\bibhang}%
-      \setlength{\itemindent}{-\leftmargin}%
-      \setlength{\itemsep}{\bibitemsep}%
-      \setlength{\parsep}{\bibparsep}}}
-  {\endenumerate}
-  {\item}
+\usepackage[autocite = superscript, sortcites = true, backend = biber, style = custom]{biblatex}\bibliography{bibrefs}
+    \defbibenvironment{bibliography}
+      {\enumerate
+          {}
+          {\setlength{\leftmargin}{\bibhang}%
+          \setlength{\itemindent}{-\leftmargin}%
+          \setlength{\itemsep}{\bibitemsep}%
+          \setlength{\parsep}{\bibparsep}}}
+      {\endenumerate}
+      {\item}
+    \DeclareCiteCommand{\citenum}
+      {}
+      {\printfield{labelnumber}}
+      {}
+      {}
 
 % roman footnotes so we don't conflict with bib references
 \renewcommand{\thefootnote}{\textit{\roman{footnote}}}
@@ -323,7 +272,7 @@
 	nobreak,
 	singleextra={%
 		\fill[black](P-|O)circle[radius=0.4em];
-		\node at(P-|O){\color{white}\scriptsize\bf i};
+		\node at(P-|O){\color{white}\scriptsize\bfseries i};
 		\draw[very thick](P-|O)++(0,-0.8em)--(O);%--(O-|P);
 	}}
 % Define a custom environment for information
@@ -367,6 +316,7 @@
 
 % shortcuts
 
+\def\degc{\textcelsius} % requires siunitx
 % \def\deg{$^{\circ}$}
 % \def\degc{$^{\circ}$C}
 % \def\dcrt{25 $^{\circ}$C}
@@ -436,19 +386,25 @@
 % ==========================================================================================
 % ==========================================================================================
 
-% hyperref, load last
-
-\PassOptionsToPackage{hyphens}{xurl} % hyperref uses url package; this enables extra hyphenation for long urls
-\usepackage[pdftex]{hyperref}
 % \urlstyle{same} % use roman instead of typewriter for url
-% \hypersetup{ colorlinks = true,
-%              linkcolor = true, 
-%              urlcolor = black,
-%              pdfauthor = {\myname},
-%              pdfkeywords = {\mydoctitle},
-%              pdftitle = {\mydoctitle},
-%              pdfsubject = {\mydoctitle},
-%              pdfpagemode = UseThumbs }
+
+% hyperref, load last except before cleveref
+% hyperref uses url package; this enables extra hyphenation for long urls
+
+\PassOptionsToPackage{hyphens}{xurl}
+\usepackage[pdftex]{hyperref}
+\hypersetup{ 
+    urlcolor = blue,
+    pdfborder = {0 0 0},
+    breaklinks = true,
+    bookmarksnumbered  = true,
+    pdfauthor = {\myname},
+    pdfkeywords = {\mydoctitle},
+    pdftitle = {\mydoctitle},
+    pdfsubject = {\mydoctitle},
+    pdfpagemode = UseThumbs
+}
+
 
 
 % ==========================================================================================
@@ -515,6 +471,8 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 % ==========================================================================================
 
 \section*{Introduction}
+
+For molar mass, use $\mathcal{M}$.
 
 Health goth\supercite{avogadro} letterpress portland\supercite{gm3} chicharrones cornhole ethical.\supercite{neutron} Coloring book dreamcatcher ethical single-origin coffee listicle, tacos venmo enamel pin retro bushwick. Polaroid deep vee umami, locavore subway tile adaptogen crucifix kickstarter pour-over waistcoat cliche selvage.\supercite{neutron,avogadro,gm3}
 
@@ -592,14 +550,33 @@ Eget aliquet nibh praesent tristique magna sit amet purus gravida. Sed viverra t
 
 Amet mauris commodo quis imperdiet. Facilisi nullam vehicula ipsum a arcu cursus. Sit amet dictum sit amet justo donec enim. Ac turpis egestas integer eget aliquet nibh. A arcu cursus vitae congue mauris. Augue lacus viverra vitae congue eu consequat ac. Congue quisque egestas diam in arcu cursus euismod quis. Tempus quam pellentesque nec nam. Pellentesque habitant morbi tristique senectus et netus et malesuada fames. Venenatis tellus in metus vulputate eu. Maecenas sed enim ut sem viverra aliquet eget. Quam lacus suspendisse faucibus interdum posuere lorem. Gravida dictum fusce ut placerat orci nulla. Tristique sollicitudin nibh sit amet commodo nulla facilisi nullam vehicula. Pretium lectus quam id leo in vitae turpis massa.
 
+%notice the syntax
+
+\begin{equation}
+\label{eq:born}
+\underbrace{text-above}_{text-below}
+\end{equation}
+
+\begin{equation}
+\label{eq:bornp}
+\underset{text-below}{text-above}
+\end{equation}
+
+\begin{equation*}
+\underbrace{\ce{CH3Cl}}_{\textnormal{electrophile}} + \underbrace{\ce{NaOH}}_{\textnormal{nucleophile}} \hskip-.5em\ce{-> CH3OH + NaCl}
+\end{equation*}
 
 
-
-
-
-
-
-
+\begin{center}
+\ce{
+Zn^2+
+<=>[+ 2OH-][+ 2H+]
+$\underset{\text{amphoteres Hydroxid}}{\ce{Zn(OH)2 v}}$
+->[+ 2OH-][+ 2H+]
+$\underset{\text{Hydroxozikat}}{\ce{[Zn(OH)4]^2-}}$
++ H2 ^
+}
+\end{center} 
 
 
 % ==========================================================================================
