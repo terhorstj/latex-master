@@ -1,661 +1,817 @@
-% ==========================================================================================
-% ==========================================================================================
-% ==========================================================================================
-\RequirePackage[l2tabu, orthodox]{nag}
+% ======================== %! jpt TEX TS-program = xelatex
+% ======================== %! jpt TEX encoding = UTF-8 Unicode
 
-\def\myname{John Terhorst}
+% ======================================================
+% ======================================================
+% ======================================================
+
+\def\mydoctitle{Mesh Communication for Checksums}
+\def\myshorttitle{Mesh Communication for Checksums} % for header/footer
+\def\mydocdesc{\LaTeX\ Template} % for titlepage with date
+\def\mydockeys{LaTeX, Template, Formatting, Typesetting} % for pdf meta
+\def\myname{John Terhorst} % Prof. Cadmium Q. Brimblecombe
+\def\mylastname{Terhorst}
 \def\myshortname{Terhorst, J.}
-\def\mydoctitle{Document Title}
-\def\myfontsize{10pt}
-\def\mymargins{1.6in}
 
-% ==========================================================================================
-% ==========================================================================================
-% ==========================================================================================
+% ======================================================
+% ======================================================
+% ======================================================
 
-\documentclass[letterpaper,\myfontsize]{article}
-%\documentclass[letterpaper,titlepage,\myfontsize]{article}
-%\documentclass[letterpaper,twocolumn,\myfontsize]{article}
-%\usepackage[top=\mymargins, bottom=\mymargins, left=\mymargins, right=\mymargins]{geometry} % showframe
-%\usepackage{typearea} % auto-calculate page layout
-% \renewcommand{\familydefault}{\sfdefault} % sans default 
-% \DeclareFontSeriesDefault[rm]{bf}{b} % when in roman family, define bfseries as b {not bx}
-% \frenchspacing %disables extra spacing after periods
+\documentclass[10pt]{article} % [titlepage]
 
-% ==========================================================================================
-% ==========================================================================================
-% ==========================================================================================
+% -----------------------------------------------------%
+%                     Essential                        %
+% -----------------------------------------------------%
 
-% basic setup - for font packages see http://www.tug.dk/FontCatalogue/
+\usepackage[T1]{fontenc}
+\usepackage{comment}
 
-% \renewcommand{\familydefault}{\sfdefault}   % \rmdefault, \sfdefault, \ttdefault
-% \usepackage[T1]{fontenc} % use for documents with lots of accented chars like \"o or \AA or \'e
-% \usepackage[tracking=true,kerning=true,factor=1100,stretch=10,shrink=10]{microtype}
-\usepackage{microtype,verbatim} % mlmodern
-\usepackage{mlmodern}
-\usepackage{graphicx}
-%\usepackage{txfonts} % use times with math support
-%\usepackage{mathptmx} % use times with math support  
-%\usepackage{newtxtext,newtxmath} % use times with math support 
-% \usepackage[smallerops,subscriptcorrection]{newtxmath} 
-% \usepackage[minionint,lf]{MinionPro} % use minionpro with math support
-%\usepackage{anyfontsize}
-%\usepackage{authoraftertitle} % access \MyTitle etc
-\usepackage[version=4]{mhchem}  % use arrows=pgf-filled if using mathptmx or newtxtext/newtxmath
-%\usepackage{parskip}
-\usepackage{siunitx}
-\usepackage{textgreek} % upright greek in text mode; eg \textalpha. use [artemisia] for tmx or [euler] for pazo
-% \usepackage{mathtools} % replaces amsmath/symb
-% \usepackage{ulem} % use underline for \emph{}; provides better \uline{}; use [normalem] to keep \emph{} as italic
-% textcomp,float % other utility packages
-% \usepackage[shortlabels]{enumitem} % can use [noitemsep] in itemize
-% \usepackage{paralist} inparaenum 
-% \usepackage[all]{nowidow} % widow/orphan prevention
-% \usepackage[bottom,hang]{footmisc}\setlength\footnotemargin{9pt}\interfootnotelinepenalty=10000\setlength{\skip\footins}{0.5cm}
-% \usepackage{setspace} % provides \doublespacing, \onehalfspacing, and \setstetch{}
-% or just use eg \linespread{1.1}
-% ==========================================================================================
-% ==========================================================================================
-% ==========================================================================================
+%\begin{comment}
+\usepackage[
+  tracking = true,
+  kerning = true,
+  spacing = true,
+  factor = 1100,
+  ]{microtype}
+%\end{comment}
+%\usepackage{microtype}
 
-% references
+% ======================================================
+% ======================================================
+% ======================================================
+
+% -----------------------------------------------------%
+%                       XeLaTeX                        %
+% -----------------------------------------------------%
+
+% use with %!TEX TS-program = xelatex
+% must use \usepackage{microtype} with no options
 
 \begin{comment}
-% natbib 
-\usepackage[super,comma,sort&compress]{natbib}
-\renewcommand{\bibnumfmt}[1]{#1.}
-% \renewcommand{\refname}{References}
-% \renewcommand{\bibname}{References}
-% use with:
-% \addcontentsline{toc}{chapter}{References}
-% \bibliographystyle{jpt-all} % see other bst files in bibtex folder % or don't declare if using achemso
-% \bibliography{refsdiss} % bibfile
-% or for manual referencing:   key      journal      year        vol       page
-\newcommand*\myaref[6]{\bibitem{#1}#2 \textit{#3} \textbf{#4}, \textit{#5}, #6.} 
-\newcommand*\mytref[7]{\bibitem{#1}#2 ``#3.'' \textit{#4} \textbf{#5}, \textit{#6}, #7.} % with title
-\newcommand*\myzref[8]{\bibitem{#1}#2 ``#3.'' \textit{#4} \textbf{#5}, \textit{#6}(#7), #8.} % with title and issue
+\usepackage{xltxtra} % automatically loads fontspec, realscripts, metalogo
+% \setromanfont{Equity Text A}
+  \setromanfont{Century Schoolbook} % nicer than fouriernc but no math support
+  \setsansfont{Concourse T4}
+  \newfontfamily\sanscaps{Concourse C4}
 \end{comment}
 
- % biber/biblatex - using custom.bbx/cbx files from acs
+% ======================================================
+% ======================================================
+% ======================================================
 
-\usepackage[autocite = superscript, sortcites = true, backend = biber, style = custom]{biblatex}\bibliography{bibrefs}
-    \defbibenvironment{bibliography}
-      {\enumerate
-          {}
-          {\setlength{\leftmargin}{\bibhang}%
-          \setlength{\itemindent}{-\leftmargin}%
-          \setlength{\itemsep}{\bibitemsep}%
-          \setlength{\parsep}{\bibparsep}}}
-      {\endenumerate}
-      {\item}
+% -----------------------------------------------------%
+%                        Fonts                         %
+% -----------------------------------------------------%
+
+% Use LM
+% \usepackage{mlmodern} % Should use Century Schoolbook in ChemDraw to match
+% \usepackage{lmodern}
+
+% Use Times
+% \usepackage[defaultsups,trueslanted]{newtxtext}
+% \usepackage[smallerops]{newtxmath}
+
+% Use Minion
+% \usepackage[minionint,lf]{MinionPro}
+
+% Use Palatino looks nice with iwona caps headings
+% \usepackage[defaultsups]{newpxtext}
+% \usepackage[smallerops]{newpxmath}
+
+% Use New Century with Math Support
+% \usepackage{fouriernc}
+
+% Use New Century without Math Support
+% \usepackage{tgschola}
+
+% Use Charter
+% \usepackage{XCharter}
+% \usepackage[xcharter]{newtxmath} 
+
+% Use Baskerville
+% \usepackage{Baskervaldx}
+% \usepackage[baskervaldx]{newtxmath} 
+
+% Use Garamond
+% \usepackage[lf]{ebgaramond}
+% \usepackage[ebgaramond]{newtxmath} 
+
+% Use int/sum from mtpro
+
+  \begin{comment}
+  \DeclareFontFamily{U}{mtt}{}
+    \DeclareFontShape{U}{mtt}{m}{up}{<->mt2exa}{}
+  \DeclareSymbolFont{splgreek}{U}{mtt}{m}{up}
+    \SetSymbolFont{splgreek}{normal}{U}{mtt}{m}{up}
+      \DeclareMathSymbol{\splsum}{\mathop}{splgreek}{"50}
+      \let\sum\splsum
+      \DeclareMathSymbol{\intop}{\mathop}{splgreek}{"52}
+  \end{comment}
+
+% ======================================================
+% ======================================================
+% ======================================================
+
+% -----------------------------------------------------%
+%                      Sans Fonts                      %
+% -----------------------------------------------------%
+
+% Use Myriad
+% \usepackage[lf]{MyriadPro}
+% \renewcommand{\familydefault}{\sfdefault}
+
+% Use Biolinum
+% \usepackage{biolinum} % looks nice with Minion
+
+% Use Iwona
+% \renewcommand{\sfdefault}{iwona}
+
+% Use Cabin
+% \usepackage{cabin} % can add [sfdefault]
+
+% ======================================================
+% ======================================================
+% ======================================================
+
+% -----------------------------------------------------%
+%              Additional Functionality                %
+% -----------------------------------------------------%
+
+\usepackage[version=4]{mhchem}
+% \usepackage{siunitx}
+% \usepackage{upgreek} % use with mlmodern
+% \usepackage{textgreek} % use with non-mlmodern fonts, [artemisia] for tx fonts
+% \usepackage{emf} % boondox \emf
+% \usepackage[cal=boondoxo,calscaled=1.1]{mathalpha} % see mathalpha docs for more options
+% \newcommand{\emf}{\mathcal{E}} 
+% \usepackage{graphicx}
+% \usepackage{parskip}
+% \usepackage[all]{nowidow}
+% \usepackage[normalem]{ulem} % provides \uline and others for section headings
+% \usepackage{subtext} % allows $\Delta G_[pol]$, declare after infobox
+% \usepackage{physics} % \bra{\phi}\ket{\psi} see docs for more
+% \usepackage{lipsum,babel}
+% \usepackage{paralist} % inparaenum
+% \usepackage{enumitem}
+
+% ======================================================
+% ======================================================
+% ======================================================
+
+% -----------------------------------------------------%
+%                 Nice spacing for caps                %
+% -----------------------------------------------------%
+
+% Try with cabin or iwona fonts in head/foot/sections
+
+\begin{comment}
+\usepackage{soul}
+\usepackage{textcase}
+\DeclareRobustCommand{\spacedallcaps}[1]{\textls[220]{\MakeTextUppercase{\sffamily #1}}}
+\DeclareRobustCommand{\spacedlowsmallcaps}[1]{\textls[80]{\MakeTextLowercase{\scshape\sffamily #1}}}
+% \addfontfeature{LetterSpace=8.0} % use this instead with XeLaTeX
+\end{comment}
+
+% ======================================================
+% ======================================================
+% ======================================================
+
+% -----------------------------------------------------%
+%                   Customize Margins                  %
+% -----------------------------------------------------%
+
+% Give 60-90 chars (including spaces) per line, or between 2-3 alphabets
+% abcdefghijklmnopqrstuvwxyz 
+% ,showframe
+
+\def\mymargins{1.6in} 
+  \usepackage[top=\mymargins, bottom=\mymargins, left=\mymargins, right=\mymargins, showframe]{geometry}  
+% \usepackage[left=\mymargins, right=\mymargins]{geometry}  
+% \usepackage[top=1.2in, bottom=1.2in, left=1.85in, right=1.85in]{geometry} % nice A4 look
+
+% ======================================================
+% ======================================================
+% ======================================================
+
+% -----------------------------------------------------%
+%        Adjust Linespacing and French spacing         %
+% -----------------------------------------------------%
+
+% \usepackage{setspace}
+  % \setstretch{1.2}
+  % \doublespacing
+  % \onehalfspacing
+  \frenchspacing
+
+% ======================================================
+% ======================================================
+% ======================================================
+
+% -----------------------------------------------------%
+%                   Better Footnotes                   %
+% -----------------------------------------------------%
+
+\begin{comment}
+\usepackage[bottom,hang]{footmisc}
+  \setlength\footnotemargin{10pt}
+  \interfootnotelinepenalty=10000
+  \setlength{\skip\footins}{0.5cm}
+\end{comment}
+  % \renewcommand{\thefootnote}{\textit{\roman{footnote}}}
+  % \counterwithout{footnote}{chapter} % don't reset footnote counter per chapter
+
+% ======================================================
+% ======================================================
+% ======================================================
+
+% -----------------------------------------------------%
+%                     Better Tables                    %
+% -----------------------------------------------------%
+
+% Better Tables
+
+\begin{comment}
+\usepackage{booktabs}
+  \setlength\heavyrulewidth{0.20ex}
+  \setlength\cmidrulewidth{0.15ex}
+  \setlength\lightrulewidth{0.1ex}
+\end{comment}
+
+% \usepackage{tabularray} % use tblr env insted of tabular for better spacing (if not using booktabs)
+                        % gives error with hyperref?
+
+% ======================================================
+% ======================================================
+% ======================================================
+
+% -----------------------------------------------------%
+%                     Better Captions                  %
+% -----------------------------------------------------%
+
+\begin{comment}
+\usepackage[font=normalsize,labelfont={bf}]{caption}
+  \captionsetup[table]{aboveskip=3pt}
+  \captionsetup[figure]{skip=3pt}
+\end{comment}
+
+% ======================================================
+% ======================================================
+% ======================================================
+
+% -----------------------------------------------------%
+%                    Customize Sections                %
+% -----------------------------------------------------%
+
+% \usepackage{titlesec} 
+\usepackage[small,bf]{titlesec} % [small,sf,bf,compact]
+% \renewcommand{\abstractname}{\large\sffamily\bfseries Abstract} % use if sf
+% \usepackage[explicit]{titlesec} % [explicit] allows #1 in final arg
+  % Serif
+  \begin{comment}
+  \titleformat{\section}{\large\bfseries}{\thetitle}{0.75em}{}
+  \titleformat{\subsection}{\bfseries}{\thetitle}{0.75em}{}
+  \titleformat{\subsubsection}{\bfseries}{\thesubsubsection}{0.75em}{}
+  \end{comment}
+  % Serif normalsize
+  \begin{comment}
+  \titleformat{\section}{\bfseries}{\thetitle}{0.75em}{}[\vspace*{-.5em}]
+  \titleformat{\subsection}{\bfseries}{\thetitle}{0.75em}{}[\vspace*{-.5em}]
+  \titleformat{\subsubsection}{\bfseries}{\thesubsubsection}{0.75em}{}[\vspace*{-.5em}]
+  \end{comment} 
+  % Sans Serif
+  \begin{comment}
+  \titleformat{\section}{\large\sffamily\bfseries}{\thetitle}{0.75em}{}
+  \titleformat{\subsection}{\sffamily\bfseries}{\thetitle}{0.75em}{}
+  \titleformat{\subsubsection}{\sffamily\bfseries}{\thesubsubsection}{0.75em}{}
+  \renewcommand{\abstractname}{\large\sffamily\bfseries Abstract}
+  \end{comment}
+  % Spaced Sans All Caps requires [explicit], make sure to put \spacedallcaps in title
+  \begin{comment}
+  \titleformat{\chapter}{\sffamily\Large}{\spacedallcaps{Chapter \thechapter}}{0em}{\vskip+20pt\Large\spacedallcaps{#1}} 
+  \titleformat{\section}{\sffamily\bfseries}{\thesection}{1.5em}{\spacedallcaps{#1}}
+  \titleformat{\subsection}{\sffamily\bfseries}{\thesubsection}{1.5em}{\spacedallcaps{#1}}
+  \titleformat{\subsubsection}{\sffamily\bfseries}{\thesubsubsection}{1.5em}{\spacedallcaps{#1}}  
+  \end{comment}
+  % Centered Section
+  \begin{comment}
+  \renewcommand{\thesection}{\Roman{section}}
+  \titleformat{\section}[block]{\filcenter\scshape}{\thetitle.}{0.5em}{}
+  \titleformat{\subsection}{\bfseries}{\thesubsection.}{.5em}{} 
+  \titleformat{\subsubsection}{\itshape}{\itshape\thesubsubsection.}{.5em}{}
+  \end{comment}
+  % Word style (not recommended) requires [explicit] and \usepackage{ulem}
+  \begin{comment}
+  \usepackage[normalem]{ulem}
+  \titleformat{\section}[block]{\filcenter}{\bfseries\thetitle.}{0.5em}{\textbf{#1}}
+  \titleformat{\subsection}{\normalfont}{\thesubsection.}{.5em}{\uline{#1}} 
+  \titleformat{\subsubsection}{\itshape}{\itshape\thesubsubsection.}{.5em}{\textit{#1}}
+  \end{comment}
+  % Numbers in margin
+  % \makeatletter\def\@seccntformat#1{\llap{\csname the#1\endcsname\quad}}\makeatother
+  % Depth
+  \setcounter{secnumdepth}{0}
+  \setcounter{tocdepth}{4}
+
+% ======================================================
+% ======================================================
+% ======================================================
+
+% -----------------------------------------------------%
+%            Control formats of TOC/LOF/LOT            %
+% -----------------------------------------------------%
+
+% See tocloft docs
+
+\begin{comment}
+\usepackage{tocloft}
+  \renewcommand{\contentsname}{\spacedallcaps{\mdseries\Large Contents}}
+  \renewcommand{\listfigurename}{\spacedallcaps{\mdseries\Large List of Figures}}
+  \renewcommand{\listtablename}{\spacedallcaps{\mdseries\Large List of Tables}}
+  \renewcommand{\cftsecfont}{{\MakeUppercase\mdseries\sffamily}}
+  \renewcommand{\cftsecpagefont}{\mdseries}
+  \renewcommand{\cftbeforesecskip}{0pt}
+\end{comment}
+
+% ======================================================
+% ======================================================
+% ======================================================
+
+% -----------------------------------------------------%
+%                 Custom Header/Footer                 %
+% -----------------------------------------------------%
+
+% \usepackage{lastpage} % gives \pageref{LastPage}
+% \DeclareRobustCommand{\finalpage}{\pageref{LastPage}} % protect from uc/lc
+% \usepackage{fancyhdr} % use with \pagestyle{fancy}
+\begin{comment}
+  \fancyhead[L]{} 
+  \fancyhead[C]{} 
+  \fancyhead[R]{} 
+  % \fancyfoot[L]{}
+  \fancyfoot[L]{\spacedallcaps{\scriptsize \mylastname: \myshorttitle}}  
+  \fancyfoot[C]{}
+  % \fancyfoot[C]{Page \thepage\ of \pageref{LastPage}}
+  % \fancyfoot[C]{\textit{\thepage}}
+  % \fancyfoot[R]{}
+  \fancyfoot[R]{\spacedallcaps{\scriptsize Page \thepage\ of \finalpage}} 
+  % \setlength{\headheight}{13.6pt}
+  % \setlength{\headsep}{0.2in}
+  \renewcommand{\headrulewidth}{0pt}
+  \renewcommand{\footrulewidth}{0.4pt}
+\end{comment}
+% Or define a custom style useful for maintaining different styles in one doc
+\begin{comment}
+\fancypagestyle{mycustom}
+  {
+    \fancyhead[L]{left} 
+    \fancyhead[C]{center} 
+    \fancyhead[R]{right} 
+    \fancyfoot[L]{left} 
+    \fancyfoot[C]{Page \thepage\ of \pageref{LastPage}}
+    \fancyfoot[R]{right} 
+  }
+\end{comment}
+
+% ======================================================
+% ======================================================
+% ======================================================
+
+% -----------------------------------------------------%
+%                    Nice Fractions                    %
+% -----------------------------------------------------%
+
+\begin{comment}
+\usepackage{nicefrac}
+  \def\half{\nicefrac{1}{2}}
+  \def\quarter{\nicefrac{1}{4}}
+  \def\threequarter{\nicefrac{3}{4}}
+  \def\third{\nicefrac{1}{3}}
+  \def\twothird{\nicefrac{2}{3}}
+  \def\eighth{\nicefrac{1}{8}}
+  \def\threeeighth{\nicefrac{3}{8}}
+\end{comment}
+
+% ======================================================
+% ======================================================
+% ======================================================
+
+% -----------------------------------------------------%
+%                      Info Box                        %
+% -----------------------------------------------------%
+
+\begin{comment}
+\usepackage[framemethod=tikz]{mdframed} 
+  \mdfdefinestyle{info}{ topline    = false,
+               bottomline = false,
+               leftline   = false,
+               rightline  = false,
+               nobreak,
+               singleextra = {
+                \fill[black](P-|O)circle[radius=0.4em];
+                \node at(P-|O){\color{white}\scriptsize\bfseries i};
+                \draw[very thick](P-|O)++(0,-0.8em)--(O); } }
+  \newenvironment{info}[1][Info:]{ 
+    \medskip
+    \begin{mdframed}[style=info]
+      \noindent{\textbf{#1}} }
+      {\end{mdframed}}
+\end{comment}
+
+% ======================================================
+% ======================================================
+% ======================================================
+
+% -----------------------------------------------------%
+%                      BibLaTeX                        %
+% -----------------------------------------------------%
+
+% use with custom.bbx/cbx
+
+\begin{comment}
+\usepackage[autocite = superscript, sortcites = true, backend = biber, style = custom]{biblatex}
+  \bibliography{bibrefs} % bib file
+  \defbibenvironment{bibliography}
+    {\enumerate
+      {}
+      {\setlength{\leftmargin}{\bibhang}%
+      \setlength{\itemindent}{-\leftmargin}%
+      \setlength{\itemsep}{\bibitemsep}%
+      \setlength{\parsep}{\bibparsep}}}
+    {\endenumerate}
+    {\item}
+    % adds \citenum{refid} to just output '1'
     \DeclareCiteCommand{\citenum}
       {}
       {\printfield{labelnumber}}
       {}
       {}
+    % Use with \printbibliography
+\end{comment}
 
-% roman footnotes so we don't conflict with bib references
-\renewcommand{\thefootnote}{\textit{\roman{footnote}}}
-\usepackage[bottom]{footmisc}\interfootnotelinepenalty=10000\setlength{\skip\footins}{0.5cm} 
+% ======================================================
+% ======================================================
+% ======================================================
+
+% -----------------------------------------------------%
+%                        NatBib                        %
+% -----------------------------------------------------%
+
+% Sciences Manual formatting, no bib/bst
+\begin{comment}
+\usepackage[super,comma,sort&compress]{natbib} 
+  \renewcommand{\bibnumfmt}[1]{#1.}
+  \newcommand{\myref}[6]{\bibitem{#1}#2 \textit{#3} \textbf{#4}, \textit{#5}, #6.}
+    % Use with:
+    % \bibliographystyle{plainnat}
+    % \begin{thebibliography}{200}
+    % \myref{heitlon}{Heitler, W.; London, F.}{Phys.\ Lett.}{1927}{44}{455--473}
+    % \end{thebibliography}
+\end{comment}
+
+% Sciences - use with e.g., jpt.bst
+\begin{comment}
+\usepackage[super,comma,sort&compress]{natbib}
+\renewcommand{\bibnumfmt}[1]{#1.}
+    % Use with:
+    % \bibliographystyle{jpt-all}
+    % \bibliography{sci-abbrev-sentence}
+\end{comment}
+
+% Lit/MLA - use with mla.bst
+\begin{comment}
+\usepackage{natbib}
+\bibpunct[ ]{(}{)}{,}{a}{}{;}
+\usepackage[normalem]{ulem}
+\newcommand{\citea}[1]{(\citeauthor{#1})}
+\newcommand{\citepg}[2]{(\citeauthor[#1]{#2})}
+\newcommand{\citeqtd}[2]{(qtd.\ in \citeauthor[#1]{#2})}
+    % Use with:
+    % \bibliographystyle{mla}
+    % \renewcommand{\refname}{Works Cited}
+    % \bibliography{lit}
+\end{comment}
+
+% ======================================================
+% ======================================================
+% ======================================================
+
+% -----------------------------------------------------%
+%                       Outlines                       %
+% -----------------------------------------------------%
+
+\begin{comment}
+
+\usepackage{enumitem}
+\usepackage{outlines}
+
+  \setenumerate[1]{label=\Alph*.}
+  \setenumerate[2]{label=\arabic*.}
+  \setenumerate[3]{label=\alph*.}
+  \setenumerate[4]{label=\roman*.}
+
+  \titleformat{\section}{\normalsize\mdseries}{\thetitle.}{.5em}{}
+  \setcounter{secnumdepth}{0}
+
+\begin{comment} 
+
+% Use like:
+
+\section{I. Introduction}
+
+\begin{outline}[enumerate]
+
+\1 Level one
+  \2 Level two
+    \3 Level three
+      \4 Level four
+
+\end{outline}
+
+\end{comment}
+
+% ======================================================
+% ======================================================
+% ======================================================
+
+% -----------------------------------------------------%
+%              Author/Affiliation Block                %
+% -----------------------------------------------------%
+
+\begin{comment}
+\usepackage[affil-it]{authblk}
+  \renewcommand\Authfont{\small}
+  \author[1,2]{John Terhorst}
+  \author[2]{Erin Schwartz}
+  \author[2]{Heather Glasser}
+  \affil[1]{Division of Natural Sciences, Vanguard University, Costa Mesa, CA 92626}
+  \affil[2]{Department of Chemistry, University of Redlands, Redlands, CA, 92373}
+\end{comment}
+
+% ======================================================
+% ======================================================
+% ======================================================
+
+% -----------------------------------------------------%
+%          Hyperlinking, URLs, and Metadata            %
+% -----------------------------------------------------%
+
+%\begin{comment}
+\PassOptionsToPackage{hyphens}{xurl}
+\usepackage{hyperref}
+\hypersetup{ 
+  urlcolor = blue,
+  colorlinks = true,
+  pdfborder = {0 0 0},
+  breaklinks = true,
+  bookmarksnumbered = true, 
+  pdfauthor = {\myname},
+  pdftitle = {\mydoctitle},
+  pdfsubject = {\mydocdesc},
+  pdfkeywords = {\mydocdesc, \mydockeys},
+  pdfpagemode = UseThumbs}
+  \urlstyle{same}
+  \newcommand{\doiurl}[1]{\href{http://dx.doi.org/#1}{http://dx.doi.org/#1}} % ex: 10.1021/ct1004017
+  \newcommand{\doi}[1]{\href{http://dx.doi.org/#1}{doi:#1}} % creates doi:10.1021/ct1004017             
+  \newcommand{\email}[1]{\href{mailto:#1}{#1}}
 %\end{comment}
 
-% use with
-\begin{comment}
-\begin{refsection}
-\printbibliography[heading=subbibliography]
-\end{refsection}
-\end{comment}
-% or just \printbibliography
+% ======================================================
+% ======================================================
+% ======================================================
 
-% sections and toc depth
-\setcounter{secnumdepth}{4}%\setcounter{tocdepth}{4}
-
-% ==========================================================================================
-% ==========================================================================================
-% ==========================================================================================
-
-% tables and figures
-
-\usepackage{booktabs}
-\setlength\heavyrulewidth{0.15ex}\setlength\cmidrulewidth{0.1ex}\setlength\lightrulewidth{0.1ex}
-
-%\usepackage[font=normalsize,labelfont={bf},margin=1in]{caption}\captionsetup[table]{aboveskip=3pt}\captionsetup[figure]{skip=3pt}
-\usepackage[font=normalsize,labelfont={sc}]{caption}\captionsetup[table]{aboveskip=3pt}\captionsetup[figure]{skip=3pt}
-% \setlength{\textfloatsep}{9pt plus 1.0pt minus 2.0pt} % adjust space from caption to body text
-
-% standard figure env - floating. can use \usepackage{float} with [H] to not float
-\begin{comment}
-\begin{figure}[htbp]
-	\centering
-		\includegraphics[width=\textwidth]{bornrad.pdf} % scale % or do \input{} for tex/tikz
-		\caption{The pairwise nature of the Born radius.}
-		\label{fig:bornrad}
-\end{figure}
-\end{comment}
-
-% to do a figure without the env, use this with \usepackage{caption} 
+% -----------------------------------------------------%
+%               Better Crossreferencing                %
+% -----------------------------------------------------% 
 
 \begin{comment}
-\begin{center}
-\resizebox{\textwidth}{!}{\input{nucleus}} % to scale \input{} figure based on geometry
-\captionof{figure}{Ions.}
-\label{fig:ion}
-\end{center}
-
-\begin{center}
-\scalebox{.75}{\input{nucleus}} % or to scale it based on figure dimensiona
-\captionof{figure}{Ions.}
-\label{fig:ions}
-\end{center}
-
-%can also use \includegraphics[width=\textwidth]{bornrad.pdf} % with [scale=0.75]
-\end{comment}
-
-% ==========================================================================================
-% ==========================================================================================
-% ==========================================================================================
-
-% section headers - \bfseries, \rmseries, \itshape, \slshape (use instead of \it for sffamily), \scshape
-
-\begin{comment}
-		\titleformat{\section}
-		{} % - formatting of entire slug
-		{} % - the section number via \thesection
-		{.25em} % - distance between number and section title
-		{} % - goes before section title but after the section number, can include formatting not applied to the number
-\end{comment}
-
-% \usepackage{titlesec} 
- \usepackage[explicit]{titlesec} % use [explicit] to include arg #1 as in example for underline
- \titleformat{\section}[block]{\filcenter}{\thetitle.}{0.5em}{\textsc{#1}} % centered title - very nice as \section*
- \titleformat{\subsection}{\normalfont}{\thesubsection.}{.5em}{\textit{#1}} % 
- \renewcommand{\abstractname}{\normalfont\textsc{Abstract}}
-% \titleformat{\section}{\bfseries}{\thetitle.}{.5em}{}
-% \titleformat{\section}[runin]{\large\bfseries}{\thetitle.}{.5em}{} - use [runin] to put text inline like \paragraph
-% \titleformat{\section}{\large\bfseries}{\thetitle.}{.5em}{}
-% \titleformat{\subsection}{\large\bfseries}{\thetitle.}{.5em}{}
-% \titleformat{\subsection}{\normalsize\itshape}{\thetitle.}{.5em}{}
-% \titleformat{\subsection}{\normalfont}{\thesubsection.}{.5em}{\uline{#1}} % requires ulem
-% \titleformat{\subsection}{\itshape}{\thesubsection.}{.5em}{\uline{#1}}
-% \titleformat{\subsubsection*}{\itshape}{\thesubsubsection*.}{.5em}{}
-% \makeatletter\def\@seccntformat#1{\llap{\csname the#1\endcsname\quad}}\makeatother %this puts header numbers in margin
-
-%                       indent    vskip before               vskip after
-% \titlespacing\section{0pt}{13pt plus 0pt minus 0pt}{11pt plus 0pt minus 0pt}
-% \titlespacing\subsection{0pt}{13pt plus 0pt minus 0pt}{11pt plus 0pt minus 0pt}
-% \titlespacing\paragraph{0pt}{13pt plus 0pt minus 0pt}{5pt plus 2pt minus 2pt}
-% \setcounter{secnumdepth}{0} % use this instead of \section* if you don't want numbered headings
-
-% ==========================================================================================
-% ==========================================================================================
-% ==========================================================================================
-
-% TOC stuff
-
-% \usepackage{titletoc} - provides additional toc features
-
-% ==========================================================================================
-% ==========================================================================================
-% ==========================================================================================
-
-% environments
-
-% \usepackage{enumerate}
-
-% \newenvironment{qnumerate}
-% {\begin{enumerate}[\bf{Q}1.]}{\end{enumerate}}
-
-% \newenvironment{anumerate}
-% {\begin{enumerate}[\bf(a)]}{\end{enumerate}}
-
-% ==========================================================================================
-% ==========================================================================================
-% ==========================================================================================
-
-% fancy page headers
-
-% built-in function
-% \pagestyle{myheadings}
-% \markboth{left}{\textnormal{\myshortname} \textit{\mydoctitle}}
-
-% \usepackage{lastpage}
-% \usepackage{fancyhdr} 
-% \renewcommand{\headrulewidth}{0pt} % this is the header hrule line
-% \setlength{\headsep}{0.2in}
-% \setlength{\headheight}{13.7pt}
-
-% \usepackage{fancyhdr} 
-%        \lhead{} 
-%        \chead{} 
-%        \rhead{\textit{\mydoctitle}} 
-%        \lfoot{} 
-%        \cfoot{\thepage}
-%        \rfoot{} 
-%        \setlength{\headheight}{14.5pt}
-%        \pagestyle{fancy} % empty, plain, fancy - use \thispagestyle{fancy} for indiv pages
-
-% \fancypagestyle{custom}
-%  {
-%   \fancyhead[L]{}
-%   \fancyhead[R]{}
-%   \fancyfoot[C]{Page \thepage\ of \pageref{LastPage}}
-%   \fancyfoot[C]{\thepage}
-%  } 
-% \pagestyle{custom}
-
-% ==========================================================================================
-% ==========================================================================================
-% ==========================================================================================
-
-% macros
-
-% \newcommand*\supr[1]{$^{#1}$}
-% \newcommand*\sub[1]{$_{#1}$}
-% \newcommand*\unit[1]{\textnormal{ #1}}
-% \newcommand*\rsq[1]{Correlation coefficient for line of best fit is $R^2=#1$}
-
-% ==========================================================================================
-% ==========================================================================================
-% ==========================================================================================
-
-% info box
-
-% Usage:
-% \begin{info}[optional title, defaults to "Info:"]
-% 	contents
-% \end{info}
-
-\usepackage[framemethod=tikz]{mdframed} % Allows defining custom boxed/framed environments
-\mdfdefinestyle{info}{%
-	topline=false, bottomline=false,
-	leftline=false, rightline=false,
-	nobreak,
-	singleextra={%
-		\fill[black](P-|O)circle[radius=0.4em];
-		\node at(P-|O){\color{white}\scriptsize\bfseries i};
-		\draw[very thick](P-|O)++(0,-0.8em)--(O);%--(O-|P);
-	}}
-% Define a custom environment for information
-\newenvironment{info}[1][Info:]{ % Set the default title to "Info:"
-	\medskip
-	\begin{mdframed}[style=info]
-		\noindent{\textbf{#1}}
-    }{ \end{mdframed} }
-
-% \usepackage{subtext} % very useful -- use as $\Delta G_[pol]$ vs $\Delta G_\textnormal{pol}$
-                       % must be loaded after infobox code, seems to conflict with tikz :(
-
-% shaded box for definition - use as \definition{term}{def}
-\newcommand{\definition}[2]{% or use another arg for color 
-         \begin{center}%
-            \begin{tikzpicture}%
-                \node[rectangle, fill=black, top color=black!10, bottom color=black!10,  inner xsep=5pt, inner ysep=5pt, outer ysep=5pt]{
-                \begin{minipage}{0.95\linewidth}\textbf{#1:} #2\end{minipage}};%
-            \end{tikzpicture}%
-         \end{center}%
-}
-
-% ==========================================================================================
-% ==========================================================================================
-% ==========================================================================================
-
-% labels - deprecated with use of cleveref (see below)
-
-% \def\tablab{Table}\def\tabslab{\tablab s}
-% \def\figlab{Figure}\def\figslab{\figlab s}
-% \def\equlab{Eq.}\def\equslab{Eqs.}
-% \newcommand*\eq[1]{\equlab~\ref{#1}}
-% \newcommand*\eqs[1]{\equslab~\ref{#1}}
-% \newcommand*\tbl[1]{\tablab~\ref{#1}}
-% \newcommand*\fig[1]{\figlab~\ref{#1}}
-% \newcommand*\figs[1]{\figslab~\ref{#1}}
-
-% ==========================================================================================
-% ==========================================================================================
-% ==========================================================================================
-
-% shortcuts
-
-\def\degc{\textcelsius} % requires siunitx
-% \def\deg{$^{\circ}$}
-% \def\degc{$^{\circ}$C}
-% \def\dcrt{25 $^{\circ}$C}
-% \def\tild{$\sim$}
-% \def\delg{$\Delta G$}
-% \def\dgnot{$\Delta G^\circ$}
-% \def\dgfnot{$\Delta G_\textnormal{f}^\circ$}
-% \def\dgrxn{$\Delta G_\textnormal{rxn}$}
-% \def\dgnotrxn{$\Delta G_\textnormal{rxn}^\circ$}
-% \def\delh{$\Delta H$}
-% \def\dhrxn{$\Delta H_\textnormal{rxn}$}
-% \def\dhnotrxn{$\Delta H_\textnormal{rxn}^\circ$}
-% \def\dhnot{$\Delta H^\circ$}
-% \def\dhf{$\Delta H_\textnormal{f}$}
-% \def\dhfnot{$\Delta H_\textnormal{f}^\circ$}
-% \def\dhfus{$\Delta H_\textnormal{fus}$}
-% \def\dhvap{$\Delta H_\textnormal{vap}$}
-% \def\dhfnot{$\Delta H_\textnormal{f}^\circ$}
-% \def\dsnotrxn{$\Delta S_\textnormal{rxn}^\circ$}
-% \def\dsnot{$\Delta S^\circ$}
-% \def\dels{$\Delta S$}
-% \def\essnot{$S^\circ$}
-% \def\electron{e$^-$}
-% \def\Ecell{$\emf_{\hspace*{-.3mm}\textnormal{cell}}$} % needs \usepackage[calligra]{emf}
-% \def\Enotcell{$\emf^{\hspace*{.5mm}\circ}_{\hspace*{-.3mm}\textnormal{cell}}$}
-% \def\Enot{$\emf^{\hspace*{.5mm}\circ}$}
-% \def\Ka{$K_{\textnormal{a}}$}
-% \def\Kb{$K_{\textnormal{b}}$}
-% \def\Ksp{$K_{\textnormal{sp}}$}
-% \def\Keq{$K_{\textnormal{eq}}$}
-% \def\Kp{$K_P$}
-% \def\Kc{$K_{\textnormal{c}}$}
-% \def\pKa{p$K_{\textnormal{a}}$}
-% \def\pKb{p$K_{\textnormal{b}}$}
-% \def\haber{\ce{N2(g) + 3H2(g) -> 2NH3(g)}}
-% \def\dipole{+\hspace*{-3mm}$\longrightarrow$}
-% \def\cmi{cm$^{-1}$}
-% \def\cd{$\cdot$}
-% \def\dd{\end{document}} % useful for debugging
-% \newcommand*\ph[1]{$\textnormal{pH}=#1$}
-% \newcommand*\Kan[2]{$K_{\textnormal{a}_{#1}}=\num{#2}$}
-
-% fractions
-
-% \usepackage{nicefrac}
-% \def\half{\nicefrac{1}{2}}
-% \def\third{\nicefrac{1}{3}}
-% \def\quarter{\nicefrac{1}{4}}
-% \def\threequarter{\nicefrac{3}{4}}
-% \def\twothird{\nicefrac{2}{3}}
-
-% boolean 
-
-% \newif\ifweb
-% \webfalse % \webtrue
-% \ifweb  
-% \else
-% \fi
-
-% ==========================================================================================
-% ==========================================================================================
-% ==========================================================================================
-
-\usepackage{tikz} % remove if no tikz
-
-% ==========================================================================================
-% ==========================================================================================
-% ==========================================================================================
-
-% \urlstyle{same} % use roman instead of typewriter for url
-
-% hyperref, load last except before cleveref
-% hyperref uses url package; this enables extra hyphenation for long urls
-
-\PassOptionsToPackage{hyphens}{xurl}
-\usepackage[pdftex]{hyperref}
-\hypersetup{ 
-    urlcolor = blue,
-    pdfborder = {0 0 0},
-    breaklinks = true,
-    bookmarksnumbered  = true,
-    pdfauthor = {\myname},
-    pdfkeywords = {\mydoctitle},
-    pdftitle = {\mydoctitle},
-    pdfsubject = {\mydoctitle},
-    pdfpagemode = UseThumbs
-}
-
-
-
-% ==========================================================================================
-% ==========================================================================================
-% ==========================================================================================
-
-% maketitle definitions
-
-\title{\mydoctitle}
-%\author{\small\myname}
-\date{\small\today}
-
-\usepackage{authblk}
-\author[1,2]{\small John Terhorst}
-\author[2]{Erin Schwartz}
-\author[2]{Heather Glasser}
-\affil[1]{\itshape Division of Natural Sciences, Vanguard University, Costa Mesa, CA 92626}
-\affil[2]{\itshape Department of Chemistry, University of Redlands, Redlands, CA, 92373}
-
 \usepackage[capitalize,noabbrev,nameinlink]{cleveref}
-\crefname{equation}{Eq.}{Eqs.}
-\crefname{page}{page}{pages}
-\creflabelformat{equation}{#2#1#3}
-\newcommand{\crefrangeconjunction}{--}
+  \crefname{equation}{Eq.}{Eqs.}
+  \crefname{page}{page}{pages}
+  \creflabelformat{equation}{#2#1#3}
+  \newcommand{\crefrangeconjunction}{--}
+\end{comment}
 
+% ======================================================
+% ======================================================
+% ======================================================
+
+% -----------------------------------------------------%
+%                  Chemistry Macros                    %
+% -----------------------------------------------------% 
+
+\begin{comment}
+\newcommand{\degc}{$^{\circ}$C}
+\newcommand{\myu}[1]{\text{\space#1}}
+\newcommand{\tild}{$\sim$}
+\newcommand{\delg}{$\Delta G$}
+\newcommand{\dgnot}{$\Delta G^{\circ}$}
+\newcommand{\dgfnot}{$\Delta G_{\text{f}}^{\circ}$}
+\newcommand{\dgrxn}{$\Delta G_{\text{rxn}}$}
+\newcommand{\dgnotrxn}{$\Delta G_{\text{rxn}}^{\circ}$}
+\newcommand{\delh}{$\Delta H$}
+\newcommand{\dhrxn}{$\Delta H_{\text{rxn}}$}
+\newcommand{\dhnotrxn}{$\Delta H_{\text{rxn}}^{\circ}$}
+\newcommand{\dhnot}{$\Delta H^{\circ}$}
+\newcommand{\dhf}{$\Delta H_{\text{f}}$}
+\newcommand{\dhfnot}{$\Delta H_{\text{f}}^{\circ}$}
+\newcommand{\dhfus}{$\Delta H_{\text{fus}}$}
+\newcommand{\dhvap}{$\Delta H_{\text{vap}}$}
+\newcommand{\dsnotrxn}{$\Delta S_{\text{rxn}}^{\circ}$}
+\newcommand{\dsnot}{$\Delta S^{\circ}$}
+\newcommand{\dels}{$\Delta S$}
+\newcommand{\essnot}{$S^{\circ}$}
+\newcommand{\electron}{e$^-$}
+\newcommand{\Ecell}{$\emf_{\text{cell}}$} 
+\newcommand{\Enotcell}{$\emf^{\circ}_{\text{cell}}$}
+\newcommand{\Enot}{$\emf^{\circ}$}
+\newcommand{\Ka}{$K_{\text{a}}$}
+\newcommand{\Kb}{$K_{\text{b}}$}
+\newcommand{\Ksp}{$K_{\text{sp}}$}
+\newcommand{\Keq}{$K_{\text{eq}}$}
+\newcommand{\Kp}{$K_P$}
+\newcommand{\Kc}{$K_{\text{c}}$}
+\newcommand{\pKa}{p$K_{\text{a}}$}
+\newcommand{\pKb}{p$K_{\text{b}}$}
+\newcommand{\dipole}{+\hspace*{-3mm}$\longrightarrow$}
+\newcommand{\cmi}{cm$^{-1}$}
+\newcommand{\cd}{$\cdot$}
+\newcommand{\ub}[2]{$\underbrace{\text{#1}}_{\text{#2}}$} % usage: \ub{top}{bottom}
+\newcommand{\us}[2]{$\underset{\text{#2}}{\text{#1}}$}    % usage: \us{top}{bottom}
+\newcommand{\ffbox}[1]{\fbox{\fbox{\parbox{.95\textwidth}{\centering #1}}}}
+\newcommand{\dd}{\end{document}}
+\end{comment}
+
+% ======================================================
+% ======================================================
+% ======================================================
+
+% -----------------------------------------------------%
+%                       Titling                        %
+% -----------------------------------------------------%
+
+\title{\vspace*{-1.4cm}\bfseries\mydoctitle} % -1.4cm puts \maketitle at 1in top margin
+% \title{\bfseries\mydoctitle}
+% \title{\sffamily\bfseries\mydoctitle}
+\author{\normalsize\myname}
+\date{\normalsize\mydocdesc \\ \today}
+
+% ======================================================
+% ======================================================
+% ======================================================
+% ======================================================
+% ======================================================
+% ======================================================
 
 \begin{document}
 
-% ==========================================================================================
-% ==========================================================================================
-% ==========================================================================================
+% ======================================================
+% ======================================================
+% ======================================================
+% ======================================================
+% ======================================================
+% ======================================================
 
-% front matter
+% -----------------------------------------------------%
+%                     Front Matter                     %
+% -----------------------------------------------------%
+
+% \begin{comment}
 %\pagestyle{empty}
-\maketitle
+%\hypersetup{pageanchor=false}
+  \maketitle
+  % \thispagestyle{empty}
+  \begin{comment}
+  \begin{abstract} \noindent 
+    Here's to the crazy ones---the misfits, the rebels, the troublemakers, the round pegs in the square holes, the ones who see things differently---they're not fond of rules, and they have no respect for the status quo. You can quote them, disagree with them, glorify or vilify them, but the only thing you can't do is ignore them, because they change things. They push the human race forward, and while some may see them as the crazy ones, we see genius, because the people who are crazy enough to think that they can change the world are the ones who do. % (Rob Siltanen)
+  \end{abstract}
+  \end{comment}
+  % \tableofcontents
+%\newpage
+%\hypersetup{pageanchor=true}
+%\pagestyle{plain}
+%\setcounter{page}{1}
+
 \begin{comment}
-\tableofcontents
-\newpage
-\pagestyle{plain}
-\setcounter{page}{1}
+
+% -----------------------------------------------------%
+%                        LOF/LOT                       %
+% -----------------------------------------------------%
+
 \pagenumbering{roman}
-\addcontentsline{toc}{section}{List of Figures}
-\listoffigures
+  \addcontentsline{toc}{section}{List of Figures}
+  \listoffigures
 \newpage
-\addcontentsline{toc}{section}{List of Tables}
-\listoftables
+  \addcontentsline{toc}{section}{List of Tables}
+  \listoftables
 \newpage
+
+% \end{comment}
+
+% ======================================================
+% ======================================================
+% ======================================================
+
+% -----------------------------------------------------%
+%                   Acknowledgments                    %
+% -----------------------------------------------------%
+
+\begin{comment}
+
+\addcontentsline{toc}{section}{Acknowledgments}
+\section*{Acknowledgments}
+
+Thank you.
+
+\newpage
+
+% \end{comment}
+
 \setcounter{page}{1}
 \pagenumbering{arabic}
+
 \end{comment}
 
-% ==========================================================================================
-% ==========================================================================================
-% ==========================================================================================
+% ======================================================
+% ======================================================
+% ======================================================
 
-\maketitle
+% -----------------------------------------------------%
+%           Choose main pagestyle if not plain         %
+% -----------------------------------------------------%
 
-\begin{abstract} % can use \begin{adjustwidth}{2cm}{2cm} text \end{adjustwidth} for faking an abstract env
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Feugiat vivamus at augue eget arcu. Donec et odio pellentesque diam volutpat commodo sed egestas egestas. Sem nulla pharetra diam sit amet. Sagittis purus sit amet volutpat consequat mauris. Urna cursus eget nunc scelerisque viverra mauris in aliquam. Nec dui nunc mattis enim. Rhoncus aenean vel elit scelerisque mauris pellentesque pulvinar. Cras fermentum odio eu feugiat pretium nibh ipsum. Luctus accumsan tortor posuere ac ut consequat semper. Suscipit tellus mauris a diam maecenas sed enim ut. Posuere lorem ipsum dolor sit amet consectetur adipiscing. Duis tristique sollicitudin nibh sit amet commodo nulla. Bibendum est ultricies integer quis. Purus ut faucibus pulvinar elementum integer enim. Pretium lectus quam id leo in vitae turpis massa. Vulputate enim nulla aliquet porttitor lacus luctus accumsan. Sapien et ligula ullamcorper malesuada proin libero nunc consequat. Tortor id aliquet lectus proin nibh nisl condimentum id. Nibh tortor id aliquet lectus proin nibh nisl.
-\end{abstract}
+% \pagestyle{fancy}
+% \pagestyle{mycustom}
+% \pagestyle{myheadings}
+% \markboth{left}{\textnormal{\myshortname}}
 
-% ==========================================================================================
-% ==========================================================================================
-% ==========================================================================================
+% ======================================================
+% ======================================================
+% ======================================================
 
-\section*{Introduction}
+% -----------------------------------------------------%
+%                      Main text                       %
+% -----------------------------------------------------%
 
-For molar mass, use $\mathcal{M}$.
+% Main Text
 
-Health goth\supercite{avogadro} letterpress portland\supercite{gm3} chicharrones cornhole ethical.\supercite{neutron} Coloring book dreamcatcher ethical single-origin coffee listicle, tacos venmo enamel pin retro bushwick. Polaroid deep vee umami, locavore subway tile adaptogen crucifix kickstarter pour-over waistcoat cliche selvage.\supercite{neutron,avogadro,gm3}
+% {\bigskip\large\bfseries\noindent\mydoctitle}
 
-%$\Delta G_[pol]$
+\section{Introduction}
 
-\begin{description}
-	\item[Stoichiometry]
-			The relationship between the relative quantities of substances taking part in a reaction or forming a compound, typically a ratio of whole integers.
-	\item[Atomic mass]
-			The mass of an atom of a chemical element expressed in atomic mass units. It is approximately equivalent to the number of protons and neutrons in the atom (the mass number) or to the average number allowing for the relative abundances of different isotopes. 
-\end{description} 
-
-\definition{Law of Definite Proportions}{A given compound always contains exactly the same proportion of elements by mass.}
-
-\smallskip
-\begin{figure}[htbp]
-\centering
-\includegraphics[scale=0.25]{square.jpg}
-\caption{The pairwise nature of the Born radius.}
-\label{sq}
-\end{figure}%
-
-See \cref{sq}.
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Feugiat vivamus at augue eget arcu. Donec et odio pellentesque diam volutpat commodo sed egestas egestas. Sem nulla pharetra diam sit amet. Sagittis purus sit amet volutpat consequat mauris. 
-
-\begin{info} % Information block
-	This is an interesting piece of information, to which the reader should pay special attention. Fusce varius orci ac magna dapibus porttitor. In tempor leo a neque bibendum sollicitudin. Nulla pretium fermentum nisi, eget sodales magna facilisis eu. Praesent aliquet nulla ut bibendum lacinia. Donec vel mauris vulputate, commodo ligula ut, egestas orci. Suspendisse commodo odio sed hendrerit lobortis. Donec finibus eros erat, vel ornare enim mattis et.
-\end{info}
-
-\begin{table}[ht]
-	\centering
-	\caption{Gravimetric analysis of silver halides in a 1.27-mL sample of Salton Sea water.}
-		\begin{tabular}{rSSScS}
-			\toprule
-				\multicolumn{1}{c}{}             & \multicolumn{4}{c}{Test Tubes}\\
-				\cmidrule(rl){2-5} 
-					Qty of Sample                & A             & B             & C             & D      & Avg             \\
-				\cmidrule(r){1-1} \cmidrule(rl){2-5} \cmidrule(l){6-6}
-					Mass (g)                     & 1.399         & 1.32          & 1.328         & 1.408  & 1.364           \\
-					Density (g/mL)               & 1.10          & 1.04          & 1.05          & 1.109  & 1.07            \\
-					Mass w/ Precipitate (g)      & 13.443        & 13.401        & 13.348        & ---    & 13.397          \\
-					Mass AgCl (\num{e-2} g)      & 9.0           & 9.2           & 8.7           & ---    & 8.9             \\
-					Moles AgCl (\num{e-4} mol)   & 6.28          & 6.42          & 6.08          & ---    & 6.50            \\
-			\bottomrule
-		\end{tabular}
-	\label{tabgrav}
-\end{table}
- 
-% tikz figure - https://www.mathcha.io/editor#
-\begin{figure}[htbp]
-	\centering
-		\input{nucleus} 
-		\caption{The nucleus.}
-		\label{fig:bornrad}
-\end{figure}
-
-Tellus in hac habitasse platea. Lectus quam id leo in vitae turpis massa sed. A condimentum vitae sapien pellentesque habitant morbi tristique. Velit sed ullamcorper morbi tincidunt. Volutpat est velit egestas dui id ornare arcu. Ipsum dolor sit amet consectetur adipiscing elit duis tristique. Tellus orci ac auctor augue mauris augue neque. 
-
-Vestibulum morbi blandit cursus risus at. Ornare lectus sit amet est placerat. Quam viverra orci sagittis eu volutpat odio facilisis mauris. Posuere ac ut consequat semper viverra nam libero justo laoreet. Phasellus egestas tellus rutrum tellus pellentesque eu tincidunt. Interdum varius sit amet mattis. Massa sapien faucibus et molestie ac feugiat sed lectus. Tellus cras adipiscing enim eu. Non diam phasellus vestibulum lorem.
-
-% ==========================================================================================
-% ==========================================================================================
-% ==========================================================================================
-
-\subsection{Procedure}
-
-Eget aliquet nibh praesent tristique magna sit amet purus gravida. Sed viverra tellus in hac. Aliquet porttitor lacus luctus accumsan tortor posuere ac ut. Neque laoreet suspendisse interdum consectetur libero id. Amet risus nullam eget felis eget nunc lobortis mattis. Etiam sit amet nisl purus. Sit amet consectetur adipiscing elit ut aliquam purus. Eu lobortis elementum nibh tellus molestie nunc non. Egestas tellus rutrum tellus pellentesque eu tincidunt tortor aliquam nulla. Vitae suscipit tellus mauris a diam. Ut pharetra sit amet aliquam id diam maecenas ultricies mi. Suspendisse faucibus interdum posuere lorem.
-
-% ==========================================================================================
-% ==========================================================================================
-% ==========================================================================================
-
-\subsection{Materials}
-
-Amet mauris commodo quis imperdiet. Facilisi nullam vehicula ipsum a arcu cursus. Sit amet dictum sit amet justo donec enim. Ac turpis egestas integer eget aliquet nibh. A arcu cursus vitae congue mauris. Augue lacus viverra vitae congue eu consequat ac. Congue quisque egestas diam in arcu cursus euismod quis. Tempus quam pellentesque nec nam. Pellentesque habitant morbi tristique senectus et netus et malesuada fames. Venenatis tellus in metus vulputate eu. Maecenas sed enim ut sem viverra aliquet eget. Quam lacus suspendisse faucibus interdum posuere lorem. Gravida dictum fusce ut placerat orci nulla. Tristique sollicitudin nibh sit amet commodo nulla facilisi nullam vehicula. Pretium lectus quam id leo in vitae turpis massa.
-
-%notice the syntax
-
-\begin{equation}
-\label{eq:born}
-\underbrace{text-above}_{text-below}
-\end{equation}
-
-\begin{equation}
-\label{eq:bornp}
-\underset{text-below}{text-above}
-\end{equation}
-
-\begin{equation*}
-\underbrace{\ce{CH3Cl}}_{\textnormal{electrophile}} + \underbrace{\ce{NaOH}}_{\textnormal{nucleophile}} \hskip-.5em\ce{-> CH3OH + NaCl}
-\end{equation*}
+Call me Ishmael. Some years ago---never mind how long precisely---having little or no money in my purse, and nothing particular to interest me on shore, I thought I would sail about a little and see the watery part of the world. It is a way I have of driving off the spleen and regulating the circulation. Whenever I find myself growing grim about the mouth; whenever it is a damp, drizzly November in my soul; whenever I find myself involuntarily pausing before coffin warehouses, and bringing up the rear of every funeral I meet; and especially whenever my hypos get such an upper hand of me, that it requires a strong moral principle to prevent me from deliberately stepping into the street, and methodically knocking people's hats off---then, I account it high time to get to sea as soon as I can. This is my substitute for pistol and ball. With a philosophical flourish Cato throws himself upon his sword; I quietly take to the ship. There is nothing surprising in this. If they but knew it, almost all men in their degree, some time or other, cherish very nearly the same feelings towards the ocean with me.
 
 
-\begin{center}
-\ce{
-Zn^2+
-<=>[+ 2OH-][+ 2H+]
-$\underset{\text{amphoteres Hydroxid}}{\ce{Zn(OH)2 v}}$
-->[+ 2OH-][+ 2H+]
-$\underset{\text{Hydroxozikat}}{\ce{[Zn(OH)4]^2-}}$
-+ H2 ^
-}
-\end{center} 
 
 
-% ==========================================================================================
-% ==========================================================================================
-% ==========================================================================================
 
-\begin{comment} % natbib/manual
+
+
+
+
+
+
+
+
+
+
+
+
+
+% ======================================================
+% ======================================================
+% ======================================================
+
+% -----------------------------------------------------%
+%                      References                      %
+% -----------------------------------------------------%
+
+\begin{comment}
 \newpage
 \addcontentsline{toc}{section}{References}
-\bibliographystyle{plain}
-\begin{thebibliography}{200}
-\mytref{heitlon}{Heitler, W.; London, F.}{Wechselwirkung neutraler Atome und hom\"oopolare Bindung nach der Quantenmechanik}{Phys.\ Lett.}{1927}{44}{455--473}
-\myzref{ez}{Terhorst, J.\ P.; Jorgensen, W.\ L.}{\textsl{E/Z} Energetics for Molecular Modeling and Design}{J.\ Chem.\ Theory Comput.}{2010}{6}{9}{2762--2769}
-\end{thebibliography}
+\printbibliography
 \end{comment}
 
-% biber/biblatex
-\printbibliography
-
-% ==========================================================================================
-% ==========================================================================================
-% ==========================================================================================
+% ======================================================
+% ======================================================
+% ======================================================
+% ======================================================
+% ======================================================
+% ======================================================
 
 \end{document}
 
+% ======================================================
+% ======================================================
+% ======================================================
+% ======================================================
+% ======================================================
+% ======================================================
+
+% Notes
+
+% ======================================================
+% ======================================================
+% ======================================================
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-% ==========================================================================================
-% ==========================================================================================
-% ==========================================================================================
-
-
-% ==========================================================================================
-% ==========================================================================================
-% ==========================================================================================
-
-% notes
-
-%          with symbol, use \footnote[2]{text}
-%          instead of 2 you can put the number of the symbol you like:
-%          1   asterisk *   
-%          2   dagger  
-%          3   double dagger  
-%          4   section symbol §   
-%          5   paragraph ¶   
-%          6   parallel lines  
-%          7   two asterisks 
-%          8   two daggers 
-%          9   two double daggers 
-
-% some fancy chem notation examples
-
-\begin{center}
-\ce{
-Zn^2+
-<=>[+ 2OH-][+ 2H+]
-$\underset{\text{amphoteres Hydroxid}}{\ce{Zn(OH)2 v}}$
-<=>[+ 2OH-][+ 2H+]
-$\underset{\text{Hydroxozikat}}{\ce{[Zn(OH)4]^2-}}$
-+ H2 ^
-}
-\end{center}    
-
-% align environment
-
-\begin{align*}
-\ce{ A + B &->[+e] C \\
-C &->[+e] D + E }
-\end{align*}
 
