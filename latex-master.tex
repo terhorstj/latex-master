@@ -5,6 +5,48 @@
 % ======================================================
 % ======================================================
 
+\documentclass[10pt]{article} % [titlepage]
+\usepackage[T1]{fontenc}
+\usepackage{comment}
+
+%\begin{comment}
+\usepackage[
+  tracking = true,
+  kerning = true,
+  spacing = true,
+  factor = 1100,
+  ]{microtype}
+%\end{comment}
+
+% ======================================================
+% ======================================================
+% ======================================================
+
+% -----------------------------------------------------%
+%                       if/then                        %
+% -----------------------------------------------------%
+
+% Use to define if/then conditions, eg for answer keys
+
+\begin{comment}
+\newif\ifprintanswers
+\printanswerstrue
+\printanswersfalse
+
+\ifprintanswers
+  {\color{red} \fbox{\parbox{5in}{\textbf{Answer:} hi }}}
+\else
+\fi
+\end{comment}
+
+% ======================================================
+% ======================================================
+% ======================================================
+
+% -----------------------------------------------------%
+%                       Identity                       %
+% -----------------------------------------------------%
+
 \def\mydoctitle{Mesh Communication for Checksums}
 \def\myshorttitle{Mesh Communication for Checksums} % for header/footer
 \def\mydocdesc{\LaTeX\ Template} % for titlepage with date
@@ -17,35 +59,14 @@
 % ======================================================
 % ======================================================
 
-\documentclass[10pt]{article} % [titlepage]
-
-% -----------------------------------------------------%
-%                     Essential                        %
-% -----------------------------------------------------%
-
-\usepackage[T1]{fontenc}
-\usepackage{comment}
-
-%\begin{comment}
-\usepackage[
-  tracking = true,
-  kerning = true,
-  spacing = true,
-  factor = 1100,
-  ]{microtype}
-%\end{comment}
-%\usepackage{microtype}
-
-% ======================================================
-% ======================================================
-% ======================================================
-
 % -----------------------------------------------------%
 %                       XeLaTeX                        %
 % -----------------------------------------------------%
 
 % use with %!TEX TS-program = xelatex
 % must use \usepackage{microtype} with no options
+
+%\usepackage{microtype}
 
 \begin{comment}
 \usepackage{xltxtra} % automatically loads fontspec, realscripts, metalogo
@@ -74,7 +95,7 @@
 % Use Minion
 % \usepackage[minionint,lf]{MinionPro}
 
-% Use Palatino looks nice with iwona caps headings
+% Use Palatino looks nice with iwona caps headings, use at least 1.05 spacing
 % \usepackage[defaultsups]{newpxtext}
 % \usepackage[smallerops]{newpxmath}
 
@@ -422,6 +443,22 @@
 % ======================================================
 
 % -----------------------------------------------------%
+%                     Frame Box                        %
+% -----------------------------------------------------%
+
+% usage: \fbox{hi}
+% usage: \fbox{\parbox{5in}{hi}}
+% macro: \newcommand{\mybox}[1]{\fbox{\parbox{5in}{#1}}}
+
+\newcommand{\mybox}[1]{\fbox{\parbox{5in}{#1}}}
+%\setlength{\fboxrule}{0.65pt}
+%\setlength{\fboxsep}{3pt}
+
+% ======================================================
+% ======================================================
+% ======================================================
+
+% -----------------------------------------------------%
 %                      BibLaTeX                        %
 % -----------------------------------------------------%
 
@@ -758,8 +795,7 @@ Thank you.
 
 \section{Introduction}
 
-Call me Ishmael. Some years ago---never mind how long precisely---having little or no money in my purse, and nothing particular to interest me on shore, I thought I would sail about a little and see the watery part of the world. It is a way I have of driving off the spleen and regulating the circulation. Whenever I find myself growing grim about the mouth; whenever it is a damp, drizzly November in my soul; whenever I find myself involuntarily pausing before coffin warehouses, and bringing up the rear of every funeral I meet; and especially whenever my hypos get such an upper hand of me, that it requires a strong moral principle to prevent me from deliberately stepping into the street, and methodically knocking people's hats off---then, I account it high time to get to sea as soon as I can. This is my substitute for pistol and ball. With a philosophical flourish Cato throws himself upon his sword; I quietly take to the ship. There is nothing surprising in this. If they but knew it, almost all men in their degree, some time or other, cherish very nearly the same feelings towards the ocean with me.
-
+Here's to the crazy ones---the misfits, the rebels, the troublemakers, the round pegs in the square holes, the ones who see things differently---they're not fond of rules, and they have no respect for the status quo. You can quote them, disagree with them, glorify or vilify them, but the only thing you can't do is ignore them, because they change things. They push the human race forward, and while some may see them as the crazy ones, we see genius, because the people who are crazy enough to think that they can change the world are the ones who do.
 
 
 
