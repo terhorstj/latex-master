@@ -95,7 +95,7 @@
 % Use Minion
 % \usepackage[minionint,lf]{MinionPro}
 
-% Use Palatino looks nice with iwona caps headings, use at least 1.05 spacing
+% Use Palatino looks nice with iwona caps headings, use at least 1.1 spacing
 % \usepackage[defaultsups]{newpxtext}
 % \usepackage[smallerops]{newpxmath}
 
@@ -209,6 +209,12 @@
   \usepackage[top=\mymargins, bottom=\mymargins, left=\mymargins, right=\mymargins, showframe]{geometry}  
 % \usepackage[left=\mymargins, right=\mymargins]{geometry}  
 % \usepackage[top=1.2in, bottom=1.2in, left=1.85in, right=1.85in]{geometry} % nice A4 look
+
+\begin{comment}
+\usepackage[subtle]{savetrees}
+\usepackage[moderate]{savetrees} 
+\usepackage[extreme]{savetrees}
+\end{comment}
 
 % ======================================================
 % ======================================================
@@ -448,9 +454,9 @@
 
 % usage: \fbox{hi}
 % usage: \fbox{\parbox{5in}{hi}}
-% macro: \newcommand{\mybox}[1]{\fbox{\parbox{5in}{#1}}}
+% macro: \mybox{hi}
 
-\newcommand{\mybox}[1]{\fbox{\parbox{5in}{#1}}}
+%\newcommand{\mybox}[1]{\fbox{\parbox{5in}{#1}}}
 %\setlength{\fboxrule}{0.65pt}
 %\setlength{\fboxsep}{3pt}
 
@@ -464,8 +470,8 @@
 
 % use with custom.bbx/cbx
 
-\begin{comment}
-\usepackage[autocite = superscript, sortcites = true, backend = biber, style = custom]{biblatex}
+\begin{comment}                                                           % or chem-acs
+\usepackage[autocite = superscript, sortcites = true, backend = biber, style = jpt]{biblatex}
   \bibliography{bibrefs} % bib file
   \defbibenvironment{bibliography}
     {\enumerate
@@ -538,7 +544,7 @@
 
 \begin{comment}
 
-\usepackage{enumitem}
+\usepackage{enumitem} 
 \usepackage{outlines}
 
   \setenumerate[1]{label=\Alph*.}
